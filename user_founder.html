@@ -18,6 +18,8 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text-dark);
 .dash-avatar{width:32px;height:32px;border-radius:50%;background:linear-gradient(135deg,var(--p1),var(--p2));display:flex;align-items:center;justify-content:center;font-size:13px;color:white;font-weight:700;}
 .dash-user-name{font-size:13px;font-weight:600;color:var(--text-dark);}
 .logout-btn{padding:8px 18px;border-radius:40px;background:transparent;border:1px solid rgba(79,70,229,0.2);color:var(--p1);font-size:13px;font-weight:600;cursor:pointer;}
+.connect-btn{padding:10px 20px;border-radius:40px;background:linear-gradient(135deg,var(--p1),var(--p2));border:none;color:white;font-size:13px;font-weight:600;cursor:pointer;display:flex;align-items:center;gap:8px;transition:all 0.3s;}
+.connect-btn:hover{transform:translateY(-2px);box-shadow:0 8px 20px rgba(79,70,229,0.3);}
 .dash-body{padding:36px 40px;max-width:1200px;margin:0 auto;}
 .dash-greeting{margin-bottom:32px;}
 .dash-greeting h1{font-size:28px;font-weight:800;}
@@ -53,7 +55,7 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text-dark);
 </style>
 </head>
 <body>
-<nav class="dash-nav"><a class="logo" href="index.html"><i class="fas fa-bolt"></i> NexusLaunch</a><div class="dash-nav-right"><div class="dash-user-pill"><div class="dash-avatar">AJ</div><span class="dash-user-name">Alex Johnson · Founder</span></div><button class="logout-btn" onclick="logout()"><i class="fas fa-sign-out-alt"></i> Logout</button></div></nav>
+<nav class="dash-nav"><a class="logo" href="index.html"><i class="fas fa-bolt"></i> NexusLaunch</a><div class="dash-nav-right"><button class="connect-btn" onclick="window.location.href='founder_connect.html'"><i class="fas fa-handshake"></i> Founder Connect</button><div class="dash-user-pill"><div class="dash-avatar">AJ</div><span class="dash-user-name">Alex Johnson · Founder</span></div><button class="logout-btn" onclick="logout()"><i class="fas fa-sign-out-alt"></i> Logout</button></div></nav>
 <div class="dash-body">
   <div class="dash-greeting"><h1>Welcome back, Alex 🚀</h1><p>Track your pitch performance and connect with investors.</p></div>
   <div class="stats-grid"><div class="stat-card"><div class="stat-card-label">Pitch Views</div><div class="stat-card-value">312</div><div class="stat-card-sub">+28 today</div></div><div class="stat-card"><div class="stat-card-label">Investor Interest</div><div class="stat-card-value">14</div><div class="stat-card-sub">5 new this week</div></div><div class="stat-card"><div class="stat-card-label">AI Score</div><div class="stat-card-value">8.2</div><div class="stat-card-sub">Top 15% on platform</div></div><div class="stat-card"><div class="stat-card-label">Startup Stage</div><div class="stat-card-value">Seed</div><div class="stat-card-sub">GreenChain Logistics</div></div></div>

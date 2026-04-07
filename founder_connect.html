@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Founder Connect | NexusLaunch</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body { font-family: 'Inter', sans-serif; background: #fafbff; color: #0f172a; overflow-x: hidden; }
+
+.container { max-width: 1280px; margin: 0 auto; padding: 0 32px; }
+
+@keyframes fadeUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+@keyframes float { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+@keyframes glowPulse { 0% { box-shadow: 0 0 0 0 rgba(79,70,229,0.4); } 70% { box-shadow: 0 0 0 12px rgba(79,70,229,0); } 100% { box-shadow: 0 0 0 0 rgba(79,70,229,0); } }
+
+.fade-up { animation: fadeUp 0.7s cubic-bezier(0.2,0.9,0.4,1.1) forwards; }
+.delay-1 { animation-delay: 0.1s; opacity: 0; animation-fill-mode: forwards; }
+.delay-2 { animation-delay: 0.2s; opacity: 0; animation-fill-mode: forwards; }
+.delay-3 { animation-delay: 0.3s; opacity: 0; animation-fill-mode: forwards; }
+.delay-4 { animation-delay: 0.4s; opacity: 0; animation-fill-mode: forwards; }
+.delay-5 { animation-delay: 0.5s; opacity: 0; animation-fill-mode: forwards; }
+
+/* Header */
+header {
+  position: sticky; top: 0; z-index: 100;
+  background: rgba(255,255,255,0.96); backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(0,0,0,0.05); padding: 16px 0;
+}
+.navbar { display: flex; justify-content: space-between; align-items: center; gap: 20px; flex-wrap: wrap; }
+.logo { font-size: 26px; font-weight: 800; background: linear-gradient(135deg,#4f46e5,#7c3aed); background-clip: text; -webkit-background-clip: text; color: transparent; display: flex; align-items: center; gap: 8px; text-decoration: none; cursor: pointer; }
+.nav-links { display: flex; gap: 28px; align-items: center; flex-wrap: wrap; }
+.nav-links a { text-decoration: none; font-weight: 500; color: #334155; font-size: 15px; transition: color 0.2s; }
+.nav-links a:hover { color: #4f46e5; }
+.btn-back { background: transparent; border: 1.5px solid #e2e8f0; padding: 10px 22px; border-radius: 40px; font-weight: 600; font-size: 14px; color: #4f46e5; cursor: pointer; transition: all 0.3s; display: flex; align-items: center; gap: 8px; text-decoration: none; }
+.btn-back:hover { border-color: #4f46e5; background: rgba(79,70,229,0.05); }
+
+/* Hero */
+.hero-section {
+  padding: 90px 0 70px;
+  background: linear-gradient(135deg, #1e1b4b 0%, #4f46e5 60%, #7c3aed 100%);
+  position: relative; overflow: hidden;
+}
+.hero-section::before {
+  content: ''; position: absolute; top: -40%; right: -20%; width: 70%; height: 170%;
+  background: radial-gradient(circle, rgba(255,255,255,0.07) 0%, transparent 70%);
+  pointer-events: none;
+}
+.hero-badge {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.25);
+  color: #e0e7ff; font-size: 13px; font-weight: 600; padding: 8px 18px;
+  border-radius: 40px; margin-bottom: 28px; backdrop-filter: blur(8px);
+}
+.hero-section h1 { font-size: 54px; font-weight: 800; color: white; line-height: 1.15; margin-bottom: 22px; }
+.hero-section h1 span { background: linear-gradient(135deg, #a5b4fc, #e0e7ff); background-clip: text; -webkit-background-clip: text; color: transparent; }
+.hero-section p { font-size: 19px; color: rgba(255,255,255,0.85); line-height: 1.65; max-width: 580px; margin-bottom: 40px; }
+.hero-actions { display: flex; gap: 16px; flex-wrap: wrap; }
+.btn-primary { background: white; border: none; padding: 15px 34px; border-radius: 48px; font-weight: 700; font-size: 15px; color: #4f46e5; cursor: pointer; transition: all 0.3s; display: inline-flex; align-items: center; gap: 10px; box-shadow: 0 8px 25px rgba(0,0,0,0.2); animation: glowPulse 2.5s infinite; }
+.btn-primary:hover { transform: translateY(-3px); box-shadow: 0 16px 35px rgba(0,0,0,0.3); }
+.btn-outline-white { background: transparent; border: 1.5px solid rgba(255,255,255,0.5); padding: 15px 34px; border-radius: 48px; font-weight: 600; font-size: 15px; color: white; cursor: pointer; transition: all 0.3s; display: inline-flex; align-items: center; gap: 10px; }
+.btn-outline-white:hover { background: rgba(255,255,255,0.1); border-color: white; transform: translateY(-2px); }
+
+.hero-stats { display: flex; gap: 40px; flex-wrap: wrap; margin-top: 50px; padding-top: 40px; border-top: 1px solid rgba(255,255,255,0.15); }
+.hero-stat-item { text-align: left; }
+.hero-stat-item .num { font-size: 34px; font-weight: 800; color: white; }
+.hero-stat-item .lbl { font-size: 14px; color: rgba(255,255,255,0.65); margin-top: 4px; font-weight: 500; }
+
+/* Filter Section */
+.filter-section { padding: 40px 0; background: white; border-bottom: 1px solid #e2e8f0; position: sticky; top: 73px; z-index: 50; }
+.search-row { display: flex; gap: 14px; flex-wrap: wrap; align-items: center; }
+.search-input-wrap { flex: 1; min-width: 240px; position: relative; }
+.search-input-wrap i { position: absolute; left: 18px; top: 50%; transform: translateY(-50%); color: #94a3b8; font-size: 15px; }
+.search-input-wrap input { width: 100%; padding: 14px 18px 14px 46px; border: 1.5px solid #e2e8f0; border-radius: 40px; font-family: inherit; font-size: 15px; transition: all 0.3s; background: #f8fafc; color: #0f172a; }
+.search-input-wrap input:focus { outline: none; border-color: #4f46e5; background: white; box-shadow: 0 0 0 3px rgba(79,70,229,0.1); }
+.filter-select { padding: 14px 20px; border: 1.5px solid #e2e8f0; border-radius: 40px; font-family: inherit; font-size: 14px; background: #f8fafc; color: #334155; cursor: pointer; font-weight: 500; transition: all 0.3s; appearance: none; padding-right: 36px; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%2394a3b8' d='M6 8L1 3h10z'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 14px center; }
+.filter-select:focus { outline: none; border-color: #4f46e5; }
+.filter-tags { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 18px; }
+.filter-tag { padding: 7px 16px; border-radius: 30px; font-size: 13px; font-weight: 600; cursor: pointer; transition: all 0.25s; border: 1.5px solid #e2e8f0; background: white; color: #64748b; }
+.filter-tag:hover, .filter-tag.active { background: linear-gradient(135deg,#4f46e5,#7c3aed); color: white; border-color: transparent; transform: translateY(-1px); }
+.results-count { font-size: 14px; color: #64748b; margin-left: auto; font-weight: 500; }
+
+/* Founders Grid */
+.founders-section { padding: 64px 0; background: #fafbff; }
+.section-header { margin-bottom: 48px; }
+.section-header h2 { font-size: 36px; font-weight: 700; color: #0f172a; margin-bottom: 10px; }
+.section-header p { font-size: 17px; color: #475569; }
+
+.founders-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 26px; }
+.founder-card {
+  background: white; border-radius: 28px; padding: 30px 26px;
+  border: 1px solid #e8edf5; transition: all 0.35s cubic-bezier(0.2,0.9,0.4,1.1);
+  cursor: default; position: relative; overflow: hidden;
+}
+.founder-card::before {
+  content: ''; position: absolute; bottom: 0; left: 0; width: 100%; height: 3px;
+  background: linear-gradient(135deg,#4f46e5,#7c3aed);
+  transform: scaleX(0); transform-origin: left; transition: transform 0.3s;
+}
+.founder-card:hover::before { transform: scaleX(1); }
+.founder-card:hover { transform: translateY(-8px); box-shadow: 0 24px 48px -12px rgba(79,70,229,0.18); border-color: #c7d2fe; }
+
+.card-top { display: flex; align-items: flex-start; gap: 16px; margin-bottom: 20px; }
+.founder-avatar {
+  width: 60px; height: 60px; border-radius: 20px; flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 22px; font-weight: 800; color: white;
+  background: linear-gradient(135deg,#4f46e5,#7c3aed);
+}
+.av-teal { background: linear-gradient(135deg,#0d9488,#0f766e); }
+.av-coral { background: linear-gradient(135deg,#f97316,#ea580c); }
+.av-pink { background: linear-gradient(135deg,#ec4899,#db2777); }
+.av-blue { background: linear-gradient(135deg,#3b82f6,#2563eb); }
+.av-green { background: linear-gradient(135deg,#22c55e,#16a34a); }
+.av-amber { background: linear-gradient(135deg,#f59e0b,#d97706); }
+
+.founder-meta { flex: 1; min-width: 0; }
+.founder-name { font-size: 18px; font-weight: 700; color: #0f172a; margin-bottom: 3px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.founder-company { font-size: 13px; color: #64748b; margin-bottom: 8px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.verified-badge { display: inline-flex; align-items: center; gap: 5px; background: #f0fdf4; color: #16a34a; font-size: 11px; font-weight: 600; padding: 3px 10px; border-radius: 20px; }
+
+.founder-focus { display: flex; gap: 7px; flex-wrap: wrap; margin-bottom: 16px; }
+.focus-tag { background: #eef2ff; color: #4f46e5; font-size: 12px; font-weight: 600; padding: 4px 12px; border-radius: 20px; }
+
+.founder-bio { font-size: 14px; color: #475569; line-height: 1.6; margin-bottom: 20px; display: -webkit-box; -webkit-line-clamp: 3; line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+
+.founder-stats { display: flex; gap: 20px; padding: 16px 0; border-top: 1px solid #f1f5f9; border-bottom: 1px solid #f1f5f9; margin-bottom: 20px; }
+.f-stat { text-align: center; flex: 1; }
+.f-stat .val { font-size: 18px; font-weight: 700; color: #0f172a; }
+.f-stat .key { font-size: 11px; color: #94a3b8; font-weight: 500; margin-top: 2px; }
+
+.card-actions { display: flex; gap: 10px; }
+.btn-connect { flex: 1; background: linear-gradient(135deg,#4f46e5,#7c3aed); color: white; border: none; padding: 11px 0; border-radius: 30px; font-weight: 600; font-size: 14px; cursor: pointer; transition: all 0.3s; display: flex; align-items: center; justify-content: center; gap: 8px; }
+.btn-connect:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(79,70,229,0.35); }
+.btn-save { width: 44px; height: 44px; border-radius: 50%; border: 1.5px solid #e2e8f0; background: white; color: #94a3b8; cursor: pointer; transition: all 0.3s; display: flex; align-items: center; justify-content: center; font-size: 15px; }
+.btn-save:hover, .btn-save.saved { border-color: #f43f5e; color: #f43f5e; background: #fff1f2; }
+
+/* Featured Founder */
+.featured-section { padding: 56px 0; background: white; }
+.featured-card {
+  background: linear-gradient(135deg,#1e1b4b,#4f46e5);
+  border-radius: 40px; padding: 50px; color: white;
+  display: flex; align-items: center; gap: 48px; flex-wrap: wrap;
+  position: relative; overflow: hidden;
+}
+.featured-card::after {
+  content: ''; position: absolute; top: -30%; right: -10%; width: 50%; height: 160%;
+  background: radial-gradient(circle, rgba(255,255,255,0.08) 0%, transparent 70%);
+}
+.featured-badge { display: inline-flex; align-items: center; gap: 6px; background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.25); color: #e0e7ff; font-size: 12px; font-weight: 700; padding: 6px 16px; border-radius: 30px; margin-bottom: 16px; }
+.featured-avatar { width: 100px; height: 100px; border-radius: 28px; background: rgba(255,255,255,0.2); display: flex; align-items: center; justify-content: center; font-size: 38px; font-weight: 800; color: white; flex-shrink: 0; border: 2px solid rgba(255,255,255,0.25); animation: float 5s ease-in-out infinite; }
+.featured-info { flex: 1; }
+.featured-info h3 { font-size: 30px; font-weight: 800; margin-bottom: 4px; }
+.featured-info .role { font-size: 16px; color: rgba(255,255,255,0.75); margin-bottom: 20px; }
+.featured-info p { font-size: 16px; color: rgba(255,255,255,0.85); line-height: 1.65; max-width: 480px; margin-bottom: 28px; }
+.featured-quick-stats { display: flex; gap: 32px; flex-wrap: wrap; margin-bottom: 28px; }
+.fq-stat .num { font-size: 26px; font-weight: 800; }
+.fq-stat .lbl { font-size: 12px; color: rgba(255,255,255,0.65); margin-top: 2px; }
+.btn-feature-connect { background: white; color: #4f46e5; border: none; padding: 14px 32px; border-radius: 40px; font-weight: 700; font-size: 15px; cursor: pointer; transition: all 0.3s; display: inline-flex; align-items: center; gap: 10px; }
+.btn-feature-connect:hover { transform: translateY(-3px); box-shadow: 0 12px 28px rgba(0,0,0,0.25); }
+
+/* Collaboration Opportunities */
+.collab-section { padding: 64px 0; background: #f8fafc; }
+.collab-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 24px; margin-top: 40px; }
+.collab-card {
+  background: white; border-radius: 24px; overflow: hidden;
+  border: 1px solid #e8edf5; transition: all 0.35s;
+}
+.collab-card:hover { transform: translateY(-6px); box-shadow: 0 20px 40px -12px rgba(79,70,229,0.15); }
+.collab-header { padding: 24px 24px 0; display: flex; justify-content: space-between; align-items: flex-start; }
+.collab-badge { display: inline-flex; align-items: center; gap: 6px; font-size: 12px; font-weight: 700; padding: 5px 14px; border-radius: 20px; }
+.collab-badge.active { background: #f0fdf4; color: #16a34a; }
+.collab-badge.upcoming { background: #eff6ff; color: #2563eb; }
+.collab-date { font-size: 13px; color: #94a3b8; font-weight: 500; display: flex; align-items: center; gap: 6px; }
+.collab-body { padding: 20px 24px 24px; }
+.collab-title { font-size: 20px; font-weight: 700; color: #0f172a; margin-bottom: 8px; }
+.collab-type { font-size: 14px; color: #64748b; margin-bottom: 16px; display: flex; align-items: center; gap: 6px; }
+.collab-details { display: flex; gap: 16px; flex-wrap: wrap; margin-bottom: 20px; }
+.collab-detail { font-size: 13px; color: #475569; display: flex; align-items: center; gap: 6px; }
+.collab-detail i { color: #4f46e5; }
+.btn-apply { width: 100%; background: linear-gradient(135deg,#4f46e5,#7c3aed); color: white; border: none; padding: 13px; border-radius: 24px; font-weight: 600; font-size: 14px; cursor: pointer; transition: all 0.3s; display: flex; align-items: center; justify-content: center; gap: 8px; }
+.btn-apply:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(79,70,229,0.3); }
+
+/* How it works */
+.how-section { padding: 72px 0; background: white; }
+.steps-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 32px; margin-top: 56px; position: relative; }
+.step-card { text-align: center; padding: 36px 24px; border-radius: 28px; background: #f8fafc; transition: all 0.35s; cursor: default; }
+.step-card:hover { background: #eef2ff; transform: translateY(-3px); }
+.step-num { font-size: 36px; font-weight: 800; background: linear-gradient(135deg,#4f46e5,#7c3aed); background-clip: text; -webkit-background-clip: text; color: transparent; margin-bottom: 12px; }
+.step-card h3 { font-size: 18px; font-weight: 700; margin-bottom: 12px; color: #0f172a; }
+.step-card p { font-size: 14px; color: #64748b; line-height: 1.6; }
+
+/* Footer */
+footer { background: white; border-top: 1px solid #e2e8f0; padding: 40px 0; text-align: center; }
+footer p { color: #64748b; font-size: 14px; }
+
+@media (max-width: 768px) {
+  .hero-section { padding: 60px 0 50px; }
+  .hero-section h1 { font-size: 36px; }
+  .hero-section p { font-size: 17px; }
+  .founders-grid { grid-template-columns: 1fr; }
+  .featured-card { padding: 30px; gap: 24px; }
+  .featured-info h3 { font-size: 24px; }
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="container">
+    <nav class="navbar">
+      <a href="landing_v2.html" class="logo"><i class="fas fa-bolt"></i> NexusLaunch</a>
+      <div class="nav-links">
+        <a href="#founders">Explore Founders</a>
+        <a href="#collaboration">Collaboration</a>
+        <a href="landing_v2.html" class="btn-back"><i class="fas fa-arrow-left"></i> Back to Dashboard</a>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<section class="hero-section">
+  <div class="container">
+    <div class="fade-up delay-1">
+      <div class="hero-badge"><i class="fas fa-handshake"></i> Connect & Collaborate</div>
+      <h1>Find Your Perfect <span>Co-Founder</span></h1>
+      <p>Connect with talented founders building the next generation of startups. Share ideas, collaborate on projects, and grow your network.</p>
+    </div>
+    <div class="hero-actions fade-up delay-2">
+      <button class="btn-primary"><i class="fas fa-arrow-down"></i> Browse Founders</button>
+      <button class="btn-outline-white"><i class="fas fa-star"></i> Featured</button>
+    </div>
+    <div class="hero-stats fade-up delay-3">
+      <div class="hero-stat-item">
+        <div class="num">2,500+</div>
+        <div class="lbl">Active Founders</div>
+      </div>
+      <div class="hero-stat-item">
+        <div class="num">850+</div>
+        <div class="lbl">Collaborations</div>
+      </div>
+      <div class="hero-stat-item">
+        <div class="num">$125M</div>
+        <div class="lbl">Raised Together</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="filter-section">
+  <div class="container">
+    <div class="search-row">
+      <div class="search-input-wrap">
+        <i class="fas fa-search"></i>
+        <input type="text" id="searchInput" placeholder="Search by name, startup, or skills...">
+      </div>
+      <select class="filter-select" id="industryFilter">
+        <option value="">All Industries</option>
+        <option value="ai">AI/ML</option>
+        <option value="fintech">FinTech</option>
+        <option value="healthtech">HealthTech</option>
+        <option value="cleantech">CleanTech</option>
+        <option value="edtech">EdTech</option>
+        <option value="saas">SaaS</option>
+      </select>
+      <select class="filter-select" id="stageFilter">
+        <option value="">All Stages</option>
+        <option value="idea">Idea Stage</option>
+        <option value="pre-seed">Pre-Seed</option>
+        <option value="seed">Seed</option>
+        <option value="series-a">Series A</option>
+      </select>
+      <span class="results-count"><strong id="resultCount">12</strong> founders found</span>
+    </div>
+    <div class="filter-tags">
+      <div class="filter-tag active">All</div>
+      <div class="filter-tag">Tech</div>
+      <div class="filter-tag">Design</div>
+      <div class="filter-tag">Business</div>
+      <div class="filter-tag">Marketing</div>
+    </div>
+  </div>
+</section>
+
+<section class="founders-section" id="founders">
+  <div class="container">
+    <div class="section-header">
+      <h2>Discover Founders</h2>
+      <p>Browse talented founders looking to collaborate and build great companies.</p>
+    </div>
+    <div class="founders-grid" id="foundersGrid"></div>
+  </div>
+</section>
+
+<section class="featured-section">
+  <div class="container">
+    <div class="featured-card">
+      <div class="featured-avatar">SK</div>
+      <div class="featured-info">
+        <div class="featured-badge"><i class="fas fa-crown"></i> Featured This Week</div>
+        <h3>Sarah Kim</h3>
+        <div class="role">CEO @ TechFlow AI | Series A Founder</div>
+        <p>Building the future of enterprise AI. Looking for visionary product designers and growth hackers to join the team. 3 years experience scaling startups from 0-50M ARR.</p>
+        <div class="featured-quick-stats">
+          <div class="fq-stat">
+            <div class="num">3</div>
+            <div class="lbl">Companies Founded</div>
+          </div>
+          <div class="fq-stat">
+            <div class="num">180+</div>
+            <div class="lbl">Network Connections</div>
+          </div>
+          <div class="fq-stat">
+            <div class="num">8.7/10</div>
+            <div class="lbl">Community Rating</div>
+          </div>
+        </div>
+        <button class="btn-feature-connect"><i class="fas fa-message"></i> Message Sarah</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="collab-section" id="collaboration">
+  <div class="container">
+    <div class="section-header">
+      <h2>Collaboration Opportunities</h2>
+      <p>Join founders in active collaboration groups and hackathons.</p>
+    </div>
+    <div class="collab-grid" id="collabGrid"></div>
+  </div>
+</section>
+
+<section class="how-section">
+  <div class="container">
+    <div class="section-header">
+      <h2>How it Works</h2>
+    </div>
+    <div class="steps-grid">
+      <div class="step-card">
+        <div class="step-num">1</div>
+        <h3>Browse Founders</h3>
+        <p>Discover founders with complementary skills and shared vision for solving problems.</p>
+      </div>
+      <div class="step-card">
+        <div class="step-num">2</div>
+        <h3>Connect & Chat</h3>
+        <p>Message founders directly to discuss ideas, synergies, and collaboration opportunities.</p>
+      </div>
+      <div class="step-card">
+        <div class="step-num">3</div>
+        <h3>Build Together</h3>
+        <p>Collaborate on projects, share resources, and grow your network with like-minded founders.</p>
+      </div>
+      <div class="step-card">
+        <div class="step-num">4</div>
+        <h3>Scale & Succeed</h3>
+        <p>Launch together, raise capital as a team, and build unicorns with your co-founders.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <p>&copy; 2026 NexusLaunch. Helping founders connect and build great companies. <a href="landing_v2.html" style="color:#4f46e5;text-decoration:none;font-weight:600;">← Back to Home</a></p>
+  </div>
+</footer>
+
+<script>
+const FOUNDERS = [
+  { name: 'Alex Chen', company: 'DataViz Pro', role: 'Founder & CTO', bio: 'Building beautiful data visualization tools for enterprises. Looking for a product & growth co-founder.', tags: ['AI/ML', 'Data', 'Design'], connections: 342, founded: 2, rating: 8.9, avatar: 'AC', stage: 'seed'},
+  { name: 'Maya Patel', company: 'HealthFlow', role: 'CEO & Founder', bio: 'Revolutionizing healthcare with AI-powered diagnostics. Seeking partnerships with healthcare veterans.', tags: ['HealthTech', 'AI', 'FDA'], connections: 285, founded: 1, rating: 8.6, avatar: 'MP', stage: 'pre-seed'},
+  { name: 'Jordan Lee', company: 'GreenChain', role: 'Founder', bio: 'Sustainable supply chain solutions for fashion brands. Looking for logistics & sustainability experts.', tags: ['CleanTech', 'Supply Chain', 'B2B'], connections: 198, founded: 1, rating: 8.2, avatar: 'JL', stage: 'seed'},
+  { name: 'Emma Rodriguez', company: 'EduFlow', role: 'CEO', bio: 'Democratizing education with AI tutoring. Series A ready. Looking for BD & ops co-founder.', tags: ['EdTech', 'AI', 'Scaling'], connections: 456, founded: 2, rating: 9.1, avatar: 'ER', stage: 'series-a'},
+  { name: 'Ravi Krishnan', company: 'FinSpark', role: 'Co-founder & CPO', bio: 'Micro-investing platform for Gen Z. Revenue positive. Seeking experienced CFO & fundraiser.', tags: ['FinTech', 'B2C', 'Growth'], connections: 267, founded: 1, rating: 8.4, avatar: 'RK', stage: 'seed'},
+  { name: 'Sophie Laurent', company: 'NeuroSync', role: 'Founder', bio: 'Brain-computer interface research. Looking for hardware engineers & biomedical experts.', tags: ['Biotech', 'Hardware', 'Vision'], connections: 145, founded: 1, rating: 8.8, avatar: 'SL', stage: 'idea'},
+  { name: 'Tom Wagner', company: 'CodeFlow', role: 'CEO', bio: 'No-code platform for SMBs. 10K MRR. Seeking enterprise sales & partnerships lead.', tags: ['SaaS', 'No-Code', 'B2B'], connections: 312, founded: 1, rating: 8.5, avatar: 'TW', stage: 'seed'},
+  { name: 'Zainab Hussein', company: 'FoodTech Labs', role: 'Founder', bio: 'Alternative protein innovation. Backed by angel investors. Looking for manufacturing & supply chain experts.', tags: ['FoodTech', 'Manufacturing', 'Sustainability'], connections: 187, founded: 1, rating: 8.3, avatar: 'ZH', stage: 'pre-seed'},
+  { name: 'Akira Tanaka', company: 'XR Ventures', role: 'Founder', bio: 'Building immersive experiences for enterprise training. Seeking game dev & VR specialists.', tags: ['VR/AR', 'Enterprise', 'Training'], connections: 223, founded: 1, rating: 8.7, avatar: 'AT', stage: 'seed'},
+  { name: 'Lucia Moreno', company: 'CyberGuard', role: 'CTO & Founder', bio: 'Enterprise cybersecurity for SMBs. Pre-revenue. Looking for sales & marketing co-founder.', tags: ['Cybersecurity', 'Enterprise', 'B2B'], connections: 156, founded: 1, rating: 8.1, avatar: 'LM', stage: 'idea'},
+  { name: 'Hassan Ahmed', company: 'MobiPay', role: 'CEO', bio: 'Fintech for African markets. 50K users. Seeking regulatory expert & international expansion lead.', tags: ['FinTech', 'Africa', 'Mobile'], connections: 298, founded: 1, rating: 8.9, avatar: 'HA', stage: 'seed'},
+  { name: 'Nina Bloom', company: 'BriefTech', role: 'Founder', bio: 'Legal tech automation for law firms. Seeking operations & sales expert for US market expansion.', tags: ['LegalTech', 'B2B', 'Automation'], connections: 210, founded: 1, rating: 8.4, avatar: 'NB', stage: 'pre-seed'}
+];
+
+const COLLABS = [
+  { title: 'AI for Good Bootcamp', type: 'Bootcamp', focus: 'AI/ML + Social Impact', spots: 8, total: 20, dates: 'Mar 15 - May 15', status: 'active'},
+  { title: 'Women Founders Summit 2026', type: 'Conference', focus: 'Networking + Fundraising', spots: 12, total: 50, dates: 'Apr 10-12', status: 'active'},
+  { title: 'ClimateHack Hackathon', type: 'Hackathon', focus: 'CleanTech Innovation', spots: 15, total: 30, dates: 'May 5-7', status: 'upcoming'},
+  { title: 'B2B SaaS Accelerator Cohort 8', type: 'Accelerator', focus: 'SaaS Growth', spots: 3, total: 12, dates: 'Jun 1 - Aug 31', status: 'upcoming'},
+  { title: 'Asia-Pacific Founder Network', type: 'Community', focus: 'Regional Expansion', spots: 25, total: 100, dates: 'Monthly', status: 'active'},
+  { title: 'Series A Mastermind Group', type: 'Mastermind', focus: 'Capital Raising', spots: 2, total: 8, dates: 'Weekly', status: 'active'}
+];
+
+const avatarClasses = ['av-teal', 'av-coral', 'av-pink', 'av-blue', 'av-green', 'av-amber'];
+
+function founderCard(founder, index) {
+  const avatarClass = avatarClasses[index % avatarClasses.length];
+  const stageLabel = { 'idea': 'Idea', 'pre-seed': 'Pre-Seed', 'seed': 'Seed', 'series-a': 'Series A' }[founder.stage] || 'Active';
+  
+  return `
+    <div class="founder-card">
+      <div class="card-top">
+        <div class="founder-avatar ${avatarClass}">${founder.avatar}</div>
+        <div class="founder-meta">
+          <h3 class="founder-name">${founder.name}</h3>
+          <div class="founder-company">${founder.company}</div>
+          <div class="verified-badge"><i class="fas fa-check-circle"></i> ${stageLabel}</div>
+        </div>
+      </div>
+      <div class="founder-focus">${founder.tags.map(t => `<span class="focus-tag">${t}</span>`).join('')}</div>
+      <p class="founder-bio">${founder.bio}</p>
+      <div class="founder-stats">
+        <div class="f-stat"><div class="val">${founder.connections}</div><div class="key">Connections</div></div>
+        <div class="f-stat"><div class="val">${founder.founded}</div><div class="key">Companies</div></div>
+        <div class="f-stat"><div class="val">${founder.rating}/10</div><div class="key">Rating</div></div>
+      </div>
+      <div class="card-actions">
+        <button class="btn-connect" onclick="alert('Message sent to ${founder.name}!')"><i class="fas fa-envelope"></i> Message</button>
+        <button class="btn-save" onclick="this.classList.toggle('saved')"><i class="fas fa-heart"></i></button>
+      </div>
+    </div>
+  `;
+}
+
+function collabCard(collab) {
+  const badgeClass = collab.status === 'active' ? 'active' : 'upcoming';
+  const progressPercent = (collab.total - collab.spots) / collab.total * 100;
+  
+  return `
+    <div class="collab-card">
+      <div class="collab-header">
+        <div>
+          <div class="collab-badge ${badgeClass}">
+            <i class="fas ${collab.status === 'active' ? 'fa-circle' : 'fa-calendar'}"></i>
+            ${collab.status === 'active' ? 'Open Now' : 'Upcoming'}
+          </div>
+        </div>
+        <div class="collab-date"><i class="fas fa-clock"></i> ${collab.dates}</div>
+      </div>
+      <div class="collab-body">
+        <h3 class="collab-title">${collab.title}</h3>
+        <div class="collab-type"><i class="fas fa-tag"></i> ${collab.type}</div>
+        <div class="collab-details">
+          <div class="collab-detail"><i class="fas fa-target"></i> ${collab.focus}</div>
+        </div>
+        <div style="background:#f1f5f9;border-radius:12px;padding:12px 16px;display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;">
+          <div style="font-size:13px;color:#64748b;font-weight:500;">Spots Available</div>
+          <div style="display:flex;gap:8px;align-items:center;">
+            <div style="flex:1;width:100px;height:6px;background:#e2e8f0;border-radius:10px;overflow:hidden;">
+              <div style="height:100%;border-radius:10px;background:linear-gradient(135deg,#4f46e5,#7c3aed);width:${progressPercent}%;"></div>
+            </div>
+            <div style="font-size:13px;font-weight:700;color:#0f172a;">${collab.spots}/${collab.total}</div>
+          </div>
+        </div>
+        <button class="btn-apply" onclick="alert('Applied to ${collab.title}!')"><i class="fas fa-arrow-right"></i> View & Apply</button>
+      </div>
+    </div>
+  `;
+}
+
+// Render founders and collaborations
+document.getElementById('foundersGrid').innerHTML = FOUNDERS.map((f, i) => founderCard(f, i)).join('');
+document.getElementById('collabGrid').innerHTML = COLLABS.map(collabCard).join('');
+
+// Search & Filter
+document.getElementById('searchInput').addEventListener('input', filterFounders);
+document.getElementById('industryFilter').addEventListener('change', filterFounders);
+document.getElementById('stageFilter').addEventListener('change', filterFounders);
+
+function filterFounders() {
+  const search = document.getElementById('searchInput').value.toLowerCase();
+  const industry = document.getElementById('industryFilter').value;
+  const stage = document.getElementById('stageFilter').value;
+  
+  const filtered = FOUNDERS.filter(f => {
+    const matchesSearch = f.name.toLowerCase().includes(search) || 
+                          f.company.toLowerCase().includes(search) || 
+                          f.tags.some(tag => tag.toLowerCase().includes(search));
+    const matchesIndustry = !industry || f.tags.some(tag => tag.toLowerCase().includes(industry));
+    const matchesStage = !stage || f.stage === stage;
+    return matchesSearch && matchesIndustry && matchesStage;
+  });
+  
+  document.getElementById('foundersGrid').innerHTML = filtered.length > 0 
+    ? filtered.map((f, i) => founderCard(f, i)).join('')
+    : '<div style="grid-column:1/-1;text-align:center;padding:60px 20px;"><p style="color:#94a3b8;font-size:16px;">No founders found matching your criteria.</p></div>';
+  
+  document.getElementById('resultCount').textContent = filtered.length;
+}
+</script>
+
+</body>
+</html>
