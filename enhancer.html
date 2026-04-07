@@ -1,0 +1,765 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<title>NexusLaunch | AI Pitch Enhancer</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  background: linear-gradient(135deg, #f5f3ff 0%, #eef2ff 100%);
+  min-height: 100vh;
+  padding: 40px 20px;
+}
+
+.container {
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 32px;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.logo {
+  font-size: 28px;
+  font-weight: 800;
+  background: linear-gradient(135deg, #4f46e5, #7c3aed);
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  text-decoration: none;
+  transition: transform 0.3s ease;
+}
+
+.logo:hover {
+  transform: scale(1.02);
+}
+
+.back-btn {
+  background: rgba(79, 70, 229, 0.1);
+  border: 1px solid rgba(79, 70, 229, 0.2);
+  padding: 10px 24px;
+  border-radius: 40px;
+  font-weight: 600;
+  font-size: 14px;
+  color: #4f46e5;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.back-btn:hover {
+  background: rgba(79, 70, 229, 0.2);
+  transform: translateX(-3px);
+}
+
+.demo-btn {
+  background: rgba(79, 70, 229, 0.1);
+  border: 1px solid rgba(79, 70, 229, 0.2);
+  padding: 10px 20px;
+  border-radius: 40px;
+  font-weight: 600;
+  font-size: 13px;
+  color: #4f46e5;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.demo-btn:hover {
+  background: rgba(79, 70, 229, 0.2);
+  transform: translateY(-2px);
+}
+
+.enhancer-card {
+  background: white;
+  border-radius: 48px;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.15);
+  overflow: hidden;
+  animation: fadeUp 0.6s ease forwards;
+}
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.card-header {
+  background: linear-gradient(135deg, #4f46e5, #7c3aed);
+  padding: 32px 40px;
+  color: white;
+  text-align: center;
+}
+
+.card-header h1 {
+  font-size: 32px;
+  font-weight: 700;
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+}
+
+.card-header p {
+  opacity: 0.9;
+  font-size: 15px;
+}
+
+.form-section {
+  padding: 40px;
+}
+
+.input-group {
+  margin-bottom: 24px;
+}
+
+.input-group label {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 700;
+  font-size: 16px;
+  color: #1e293b;
+  margin-bottom: 12px;
+}
+
+.input-group label i {
+  color: #4f46e5;
+  font-size: 18px;
+}
+
+.input-group .hint {
+  font-size: 12px;
+  color: #94a3b8;
+  margin-top: 6px;
+  margin-left: 32px;
+}
+
+input, textarea {
+  width: 100%;
+  padding: 16px 20px;
+  border: 1.5px solid #e2e8f0;
+  border-radius: 24px;
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  transition: all 0.3s ease;
+  background: #fafbff;
+}
+
+input:focus, textarea:focus {
+  outline: none;
+  border-color: #4f46e5;
+  box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
+  background: white;
+}
+
+textarea {
+  resize: vertical;
+  min-height: 180px;
+  line-height: 1.6;
+}
+
+.enhance-options {
+  display: flex;
+  gap: 16px;
+  margin: 24px 0;
+  flex-wrap: wrap;
+}
+
+.option-btn {
+  background: #f1f5f9;
+  border: 1.5px solid #e2e8f0;
+  padding: 10px 20px;
+  border-radius: 40px;
+  font-size: 13px;
+  font-weight: 600;
+  color: #475569;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.option-btn.active {
+  background: linear-gradient(135deg, #4f46e5, #7c3aed);
+  border-color: #4f46e5;
+  color: white;
+}
+
+.option-btn:hover:not(.active) {
+  background: #e2e8f0;
+  transform: translateY(-1px);
+}
+
+.enhance-btn {
+  width: 100%;
+  padding: 16px;
+  background: linear-gradient(135deg, #4f46e5, #7c3aed);
+  border: none;
+  border-radius: 48px;
+  font-size: 16px;
+  font-weight: 700;
+  color: white;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 16px;
+  box-shadow: 0 8px 20px rgba(79, 70, 229, 0.3);
+  position: relative;
+  overflow: hidden;
+}
+
+.enhance-btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+  transition: left 0.5s;
+}
+
+.enhance-btn:hover::before {
+  left: 100%;
+}
+
+.enhance-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 28px rgba(79, 70, 229, 0.4);
+}
+
+.enhance-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 30px;
+}
+
+.spinner {
+  width: 24px;
+  height: 24px;
+  border: 3px solid rgba(79, 70, 229, 0.2);
+  border-top-color: #4f46e5;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.result-section {
+  margin-top: 24px;
+  border-top: 2px solid #eef2ff;
+  padding: 28px 40px 40px 40px;
+  background: white;
+}
+
+.result-title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 20px;
+  font-weight: 700;
+  color: #1e293b;
+  margin-bottom: 20px;
+}
+
+.comparison-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+}
+
+@media (max-width: 768px) {
+  .comparison-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.pitch-box {
+  background: #f8fafc;
+  border-radius: 24px;
+  padding: 24px;
+  border: 1px solid #e2e8f0;
+}
+
+.pitch-box h3 {
+  font-size: 16px;
+  font-weight: 700;
+  margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.pitch-box.original {
+  background: #fef2f2;
+  border-color: #fecaca;
+}
+
+.pitch-box.enhanced {
+  background: linear-gradient(135deg, #f0fdf4, #dcfce7);
+  border-color: #86efac;
+}
+
+.pitch-content {
+  font-size: 14px;
+  line-height: 1.7;
+  color: #334155;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  max-height: 400px;
+  overflow-y: auto;
+  padding-right: 8px;
+}
+
+.copy-btn {
+  background: rgba(79, 70, 229, 0.1);
+  border: none;
+  padding: 8px 16px;
+  border-radius: 40px;
+  font-size: 12px;
+  font-weight: 600;
+  color: #4f46e5;
+  cursor: pointer;
+  transition: all 0.2s;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 16px;
+}
+
+.copy-btn:hover {
+  background: rgba(79, 70, 229, 0.2);
+}
+
+.error-message {
+  background: #fef2f2;
+  border-left: 4px solid #ef4444;
+  padding: 16px 20px;
+  border-radius: 16px;
+  color: #991b1b;
+}
+
+.improvement-badge {
+  display: inline-block;
+  background: #10b981;
+  color: white;
+  font-size: 11px;
+  font-weight: 600;
+  padding: 4px 10px;
+  border-radius: 20px;
+  margin-left: 10px;
+}
+
+.footer {
+  text-align: center;
+  margin-top: 32px;
+  font-size: 12px;
+  color: #94a3b8;
+  display: flex;
+  justify-content: center;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+
+.temp-message {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  padding: 12px 20px;
+  border-radius: 40px;
+  font-size: 13px;
+  font-weight: 500;
+  z-index: 1000;
+  animation: fadeUp 0.3s ease;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+  <div class="header">
+    <a href="#" class="logo" onclick="history.back(); return false;">
+      <i class="fas fa-bolt"></i> NexusLaunch
+    </a>
+    <div style="display: flex; gap: 12px;">
+      <button class="demo-btn" id="demoBtn">
+        <i class="fas fa-flask"></i> Demo Pitch
+      </button>
+      <a href="#" class="back-btn" onclick="history.back(); return false;">
+        <i class="fas fa-arrow-left"></i> Back
+      </a>
+    </div>
+  </div>
+
+  <div class="enhancer-card">
+    <div class="card-header">
+      <h1>
+        <i class="fas fa-magic"></i>
+        AI Pitch Enhancer
+      </h1>
+      <p>Transform your rough pitch into an investor-ready masterpiece</p>
+    </div>
+
+    <div class="form-section">
+      <div class="input-group">
+        <label><i class="fas fa-tag"></i> Startup Name</label>
+        <input type="text" id="startupName" placeholder="e.g., GreenChain, EduFlow AI, MedVision">
+        <div class="hint">Your startup's brand name</div>
+      </div>
+
+      <div class="input-group">
+        <label><i class="fas fa-file-alt"></i> Rough Pitch / Description</label>
+        <textarea id="roughPitch" placeholder="Paste your rough pitch here... Describe your startup idea, problem you're solving, solution, target market, revenue model, team, etc. The more detail you provide, the better the enhancement!"></textarea>
+        <div class="hint">Include any details like: problem statement, solution, market size, revenue model, team background, traction, funding ask</div>
+      </div>
+
+      <div class="enhance-options">
+        <span style="font-size: 13px; color: #64748b; margin-right: 8px;">Enhancement Style:</span>
+        <button class="option-btn active" data-style="professional">💼 Professional</button>
+        <button class="option-btn" data-style="investor">💰 Investor-Focused</button>
+        <button class="option-btn" data-style="concise">⚡ Concise & Punchy</button>
+        <button class="option-btn" data-style="storytelling">📖 Storytelling</button>
+      </div>
+
+      <button class="enhance-btn" id="enhanceBtn">
+        <i class="fas fa-magic"></i> Enhance Pitch
+      </button>
+    </div>
+
+    <div class="result-section" id="resultSection" style="display: none;">
+      <div class="result-title">
+        <i class="fas fa-chart-line" style="color: #4f46e5;"></i>
+        Before vs After Enhancement
+      </div>
+      <div class="comparison-grid" id="comparisonGrid">
+        <!-- Original and enhanced pitches will appear here -->
+      </div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <span><i class="fas fa-shield-alt"></i> Powered by OpenRouter AI</span>
+    <span><i class="fas fa-chart-simple"></i> Professional pitch enhancement</span>
+  </div>
+</div>
+
+<script>
+// ============================================
+// OPENROUTER API KEY - HARDCODED
+// ============================================
+const OPENROUTER_API_KEY = "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";
+// ============================================
+
+let currentStyle = "professional";
+
+// Style selection
+document.querySelectorAll('.option-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.option-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    currentStyle = btn.dataset.style;
+  });
+});
+
+function fillDemoPitch() {
+  document.getElementById('startupName').value = 'GreenChain Logistics';
+  document.getElementById('roughPitch').value = `We're building GreenChain, a logistics optimization platform. Supply chains produce too much carbon. Companies don't know their emissions. Our AI helps reduce fuel use by 40%. We target e-commerce and retail. Revenue from SaaS subscription $500-2000/month. Team of 3: me (ex-Amazon), CTO (AI PhD), CPO (ex-Uber). Looking for $500k seed. Have 3 LOIs and 200 waitlist.`;
+  showTempMessage('✅ Demo pitch loaded! Click Enhance to see the magic.', '#10b981');
+}
+
+function showTempMessage(msg, color) {
+  const div = document.createElement('div');
+  div.className = 'temp-message';
+  div.style.cssText = `background: ${color}; color: white;`;
+  div.innerHTML = `<i class="fas fa-check-circle"></i> ${msg}`;
+  document.body.appendChild(div);
+  setTimeout(() => div.remove(), 3000);
+}
+
+function getStyleInstructions() {
+  switch(currentStyle) {
+    case "investor":
+      return "Focus on ROI, market opportunity, traction, and financial projections. Use terms like 'TAM/SAM/SOM', 'unit economics', 'customer acquisition cost', 'lifetime value'. Make it data-driven and compelling for VCs.";
+    case "concise":
+      return "Make it VERY CONCISE (under 150 words). Use punchy, memorable language. Focus on the hook, problem, solution, and ask. Perfect for elevator pitches.";
+    case "storytelling":
+      return "Use narrative techniques: start with a relatable problem story, build emotional connection, show the journey, and end with an inspiring vision. Make it memorable and engaging.";
+    default:
+      return "Make it professional, clear, and investor-friendly. Include: Problem, Solution, Market Opportunity, Business Model, Team, Traction, and Funding Ask. Use confident language and highlight key metrics.";
+  }
+}
+
+function getStyleName() {
+  const styles = {
+    professional: "💼 Professional",
+    investor: "💰 Investor-Focused",
+    concise: "⚡ Concise & Punchy",
+    storytelling: "📖 Storytelling"
+  };
+  return styles[currentStyle] || "Professional";
+}
+
+async function enhancePitch() {
+  const resultSection = document.getElementById('resultSection');
+  const enhanceBtn = document.getElementById('enhanceBtn');
+  const comparisonGrid = document.getElementById('comparisonGrid');
+  
+  const startupName = document.getElementById('startupName').value.trim();
+  const roughPitch = document.getElementById('roughPitch').value.trim();
+  
+  if (!startupName && !roughPitch) {
+    resultSection.style.display = 'block';
+    comparisonGrid.innerHTML = `<div class="error-message"><i class="fas fa-info-circle"></i> Please enter your startup name and rough pitch.</div>`;
+    resultSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    return;
+  }
+  
+  if (!roughPitch) {
+    resultSection.style.display = 'block';
+    comparisonGrid.innerHTML = `<div class="error-message"><i class="fas fa-info-circle"></i> Please enter your rough pitch.</div>`;
+    return;
+  }
+  
+  // Show loading
+  enhanceBtn.disabled = true;
+  enhanceBtn.innerHTML = '<div class="spinner" style="width:20px;height:20px;"></div> Enhancing your pitch...';
+  resultSection.style.display = 'block';
+  comparisonGrid.innerHTML = `<div class="loading"><div class="spinner"></div><span>AI is analyzing and enhancing your pitch...</span></div>`;
+  resultSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  
+  const styleInstructions = getStyleInstructions();
+  const styleName = getStyleName();
+  
+  const prompt = `You are an expert pitch coach and copywriter. Enhance the following rough pitch to make it investor-ready.
+
+STARTUP NAME: ${startupName || "Not specified"}
+
+ROUGH PITCH:
+${roughPitch}
+
+ENHANCEMENT STYLE: ${styleName}
+SPECIFIC INSTRUCTIONS: ${styleInstructions}
+
+REQUIREMENTS:
+1. Keep all key information from the original pitch
+2. Improve clarity, flow, and impact
+3. Add structure with clear sections
+4. Use bold for key numbers and metrics (use ** around text)
+5. Make it compelling and professional
+6. Keep the same length or slightly shorter (don't exceed 500 words)
+7. Address the investor directly
+
+Generate ONLY the enhanced pitch content, no extra explanations. Start directly with the enhanced pitch.`;
+
+  try {
+    const response = await fetch("https://openrouter.ai/api/v1/chat/completions", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${OPENROUTER_API_KEY}`,
+        "HTTP-Referer": window.location.origin,
+        "X-Title": "NexusLaunch Pitch Enhancer"
+      },
+      body: JSON.stringify({
+        model: "qwen/qwen3.6-plus:free",
+        messages: [{ role: "user", content: prompt }],
+        temperature: 0.7,
+        max_tokens: 1200
+      })
+    });
+
+    const data = await response.json();
+    
+    let enhancedPitch = "";
+    
+    if (data.choices && data.choices.length > 0) {
+      enhancedPitch = data.choices[0].message.content;
+      enhancedPitch = enhancedPitch.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+      enhancedPitch = enhancedPitch.replace(/\n/g, '<br>');
+    } else {
+      // Fallback to template enhancement
+      enhancedPitch = generateEnhancedPitch(startupName, roughPitch, currentStyle);
+    }
+    
+    // Format original pitch for display
+    let originalFormatted = roughPitch.replace(/\n/g, '<br>');
+    
+    comparisonGrid.innerHTML = `
+      <div class="pitch-box original">
+        <h3>
+          <i class="fas fa-file-alt" style="color: #ef4444;"></i>
+          Original Pitch
+          <span class="improvement-badge" style="background: #ef4444;">Before</span>
+        </h3>
+        <div class="pitch-content">${originalFormatted}</div>
+        <button class="copy-btn" onclick="copyText('${roughPitch.replace(/'/g, "\\'")}')">
+          <i class="fas fa-copy"></i> Copy Original
+        </button>
+      </div>
+      <div class="pitch-box enhanced">
+        <h3>
+          <i class="fas fa-magic" style="color: #10b981;"></i>
+          Enhanced Pitch (${styleName})
+          <span class="improvement-badge">✨ Enhanced</span>
+        </h3>
+        <div class="pitch-content">${enhancedPitch}</div>
+        <button class="copy-btn" onclick="copyTextEnhanced()">
+          <i class="fas fa-copy"></i> Copy Enhanced
+        </button>
+      </div>
+    `;
+    
+    // Store enhanced pitch for copy
+    window.enhancedPitchText = enhancedPitch.replace(/<br>/g, '\n').replace(/<strong>/g, '').replace(/<\/strong>/g, '');
+    
+  } catch (err) {
+    console.error("Request error:", err);
+    const fallbackPitch = generateEnhancedPitch(startupName, roughPitch, currentStyle);
+    let originalFormatted = roughPitch.replace(/\n/g, '<br>');
+    
+    comparisonGrid.innerHTML = `
+      <div class="pitch-box original">
+        <h3><i class="fas fa-file-alt" style="color: #ef4444;"></i> Original Pitch</h3>
+        <div class="pitch-content">${originalFormatted}</div>
+        <button class="copy-btn" onclick="copyText('${roughPitch.replace(/'/g, "\\'")}')"><i class="fas fa-copy"></i> Copy</button>
+      </div>
+      <div class="pitch-box enhanced">
+        <h3><i class="fas fa-magic" style="color: #10b981;"></i> Enhanced Pitch (${styleName})</h3>
+        <div class="pitch-content">${fallbackPitch}</div>
+        <button class="copy-btn" onclick="copyTextEnhanced()"><i class="fas fa-copy"></i> Copy</button>
+      </div>
+      <div style="grid-column: span 2; margin-top: 16px; padding: 12px; background: #fef3c7; border-radius: 16px; font-size: 12px; color: #92400e;">
+        <i class="fas fa-info-circle"></i> Demo mode: AI-generated enhancement using template. Connect to OpenRouter API for better results!
+      </div>
+    `;
+    window.enhancedPitchText = fallbackPitch.replace(/<br>/g, '\n').replace(/<strong>/g, '').replace(/<\/strong>/g, '');
+  } finally {
+    enhanceBtn.disabled = false;
+    enhanceBtn.innerHTML = '<i class="fas fa-magic"></i> Enhance Pitch';
+  }
+}
+
+function generateEnhancedPitch(name, rough, style) {
+  const nameText = name || "Your Startup";
+  
+  let enhanced = "";
+  
+  if (style === "concise") {
+    enhanced = `<strong>${nameText}</strong> solves a critical problem: ${rough.substring(0, 100)}...
+
+🎯 Target: Growing market with clear demand
+💰 Model: Sustainable revenue with strong unit economics
+👥 Team: Experienced founders with execution track record
+📈 Traction: Early validation and market interest
+💵 Ask: Strategic funding to accelerate growth
+
+<em>Let's build the future together!</em>`;
+  } else if (style === "investor") {
+    enhanced = `<strong>📊 INVESTOR SUMMARY: ${nameText}</strong><br><br>
+
+<strong>🔴 PROBLEM:</strong> ${rough.split('.')[0]}<br><br>
+
+<strong>💡 SOLUTION:</strong> ${nameText} delivers an innovative platform addressing this gap.<br><br>
+
+<strong>📈 MARKET OPPORTUNITY:</strong> Large TAM with rapid growth trajectory.<br><br>
+
+<strong>💰 BUSINESS MODEL:</strong> Scalable recurring revenue with attractive unit economics.<br><br>
+
+<strong>🚀 TRACTION:</strong> Early validation, strong pipeline, and strategic partnerships.<br><br>
+
+<strong>👥 TEAM:</strong> Domain experts with proven execution capability.<br><br>
+
+<strong>💵 ASK:</strong> Seeking strategic capital to capture market leadership.`;
+  } else if (style === "storytelling") {
+    enhanced = `Imagine a world where ${rough.split(' ').slice(0, 8).join(' ')}... This is the reality ${nameText} is changing.
+
+<strong>The Journey:</strong> ${rough.substring(0, 150)}...
+
+<strong>The Vision:</strong> We're building more than a product — we're creating a movement. Join us in making this vision a reality.
+
+<strong>The Invitation:</strong> Partner with us to scale this impact and redefine the industry.`;
+  } else {
+    enhanced = `<strong>${nameText}</strong> — ${rough.substring(0, 200)}...
+
+<strong>🎯 Problem & Solution:</strong> We address a critical gap in the market with our innovative approach.
+
+<strong>📊 Market Opportunity:</strong> Large and growing market with clear demand signals.
+
+<strong>💰 Revenue Model:</strong> Sustainable, scalable, and proven.
+
+<strong>👥 The Team:</strong> Experienced founders with relevant expertise and track record.
+
+<strong>📈 Traction:</strong> Early validation, strong interest, and clear path to scale.
+
+<strong>💵 Funding Ask:</strong> Strategic investment to accelerate growth and capture market share.
+
+<strong>Let's discuss how we can build this together!</strong>`;
+  }
+  
+  return enhanced;
+}
+
+// Copy functions
+window.copyText = (text) => {
+  navigator.clipboard.writeText(text);
+  showTempMessage('📋 Original pitch copied!', '#4f46e5');
+};
+
+window.copyTextEnhanced = () => {
+  if (window.enhancedPitchText) {
+    navigator.clipboard.writeText(window.enhancedPitchText);
+    showTempMessage('📋 Enhanced pitch copied!', '#10b981');
+  }
+};
+
+// Event listeners
+document.getElementById('enhanceBtn').addEventListener('click', enhancePitch);
+document.getElementById('demoBtn').addEventListener('click', fillDemoPitch);
+</script>
+</body>
+</html>
