@@ -13,12 +13,37 @@
   box-sizing: border-box;
 }
 
+html {
+  height: 100%;
+  scroll-behavior: smooth;
+  scroll-padding-top: 92px;
+}
+
 body {
   font-family: 'Inter', sans-serif;
   background: #fafbff;
   color: #0f172a;
-  scroll-behavior: smooth;
   overflow-x: hidden;
+  overflow-y: auto;
+  min-height: 100%;
+  scroll-snap-type: y mandatory;
+}
+
+section {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+  scroll-margin-top: 92px;
+}
+
+section > .container {
+  width: 100%;
+}
+
+footer {
+  scroll-snap-align: start;
 }
 
 .container {
@@ -287,14 +312,15 @@ header {
 
 .hero-content {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: space-between;
   gap: 60px;
   flex-wrap: wrap;
 }
 
 .hero-left {
-  flex: 1;
+  flex: 1 1 0;
+  max-width: 560px;
 }
 
 .hero-left h1 {
@@ -323,7 +349,9 @@ header {
 }
 
 .hero-right {
-  flex: 1;
+  flex: 1 1 0;
+  max-width: 520px;
+  align-self: flex-start;
   background: linear-gradient(145deg, #ffffff, #f8fafc);
   border-radius: 48px;
   padding: 40px;
@@ -824,6 +852,16 @@ footer {
 
 /* Responsive */
 @media (max-width: 768px) {
+  html {
+    scroll-snap-type: y proximity;
+    scroll-padding-top: 76px;
+  }
+
+  section {
+    min-height: auto;
+    scroll-margin-top: 76px;
+  }
+
   .hero-left h1 {
     font-size: 36px;
   }
@@ -1076,6 +1114,9 @@ const observer = new IntersectionObserver((entries) => {
   });
 }, { threshold: 0.5 });
 counters.forEach(counter => observer.observe(counter));
+
+// Full-section page scrolling
+// Native scroll snap now handles section-by-section movement reliably.
 
 // Mouse move effect for tool cards
 document.querySelectorAll('.tool-card').forEach(card => {
