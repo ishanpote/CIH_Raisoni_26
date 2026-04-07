@@ -1,0 +1,1125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+<title>NexusLaunch | AI-Powered Startup Ecosystem</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  background: #fafbff;
+  color: #0f172a;
+  scroll-behavior: smooth;
+  overflow-x: hidden;
+}
+
+.container {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 32px;
+}
+
+/* ========== ANIMATIONS ========== */
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes float {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-12px); }
+  100% { transform: translateY(0px); }
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); opacity: 0.8; }
+  50% { transform: scale(1.05); opacity: 1; }
+  100% { transform: scale(1); opacity: 0.8; }
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+@keyframes glowPulse {
+  0% { box-shadow: 0 0 0 0 rgba(79, 70, 229, 0.4); }
+  70% { box-shadow: 0 0 0 12px rgba(79, 70, 229, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(79, 70, 229, 0); }
+}
+
+/* Animation Classes */
+.fade-up {
+  animation: fadeUp 0.8s cubic-bezier(0.2, 0.9, 0.4, 1.1) forwards;
+}
+
+.fade-in {
+  animation: fadeIn 0.6s ease forwards;
+}
+
+.slide-left {
+  animation: slideInLeft 0.7s cubic-bezier(0.2, 0.9, 0.4, 1.1) forwards;
+}
+
+.slide-right {
+  animation: slideInRight 0.7s cubic-bezier(0.2, 0.9, 0.4, 1.1) forwards;
+}
+
+.delay-1 { animation-delay: 0.1s; opacity: 0; animation-fill-mode: forwards; }
+.delay-2 { animation-delay: 0.2s; opacity: 0; animation-fill-mode: forwards; }
+.delay-3 { animation-delay: 0.3s; opacity: 0; animation-fill-mode: forwards; }
+.delay-4 { animation-delay: 0.4s; opacity: 0; animation-fill-mode: forwards; }
+.delay-5 { animation-delay: 0.5s; opacity: 0; animation-fill-mode: forwards; }
+
+/* ========== BUTTONS ========== */
+.btn-primary {
+  background: linear-gradient(105deg, #4f46e5 0%, #7c3aed 100%);
+  border: none;
+  padding: 14px 32px;
+  border-radius: 48px;
+  font-weight: 600;
+  font-size: 15px;
+  color: white;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+  box-shadow: 0 8px 20px rgba(79, 70, 229, 0.3);
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-primary::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+  transition: left 0.5s;
+}
+
+.btn-primary:hover::before {
+  left: 100%;
+}
+
+.btn-primary:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 16px 30px rgba(79, 70, 229, 0.4);
+}
+
+.btn-outline {
+  background: transparent;
+  border: 1.5px solid #4f46e5;
+  padding: 14px 32px;
+  border-radius: 48px;
+  font-weight: 600;
+  font-size: 15px;
+  color: #4f46e5;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-outline:hover {
+  background: rgba(79, 70, 229, 0.08);
+  transform: translateY(-2px);
+  border-color: #7c3aed;
+  box-shadow: 0 4px 12px rgba(79, 70, 229, 0.15);
+}
+
+.btn-login {
+  background: transparent;
+  border: 1.5px solid #e2e8f0;
+  padding: 10px 24px;
+  border-radius: 40px;
+  font-weight: 600;
+  font-size: 14px;
+  color: #4f46e5;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.btn-login:hover {
+  border-color: #4f46e5;
+  background: rgba(79, 70, 229, 0.05);
+  transform: scale(1.02);
+}
+
+/* ========== HEADER ========== */
+header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(255, 255, 255, 0.96);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  padding: 16px 0;
+  transition: all 0.3s ease;
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.logo {
+  font-size: 28px;
+  font-weight: 800;
+  background: linear-gradient(135deg, #4f46e5, #7c3aed);
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  letter-spacing: -0.5px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: transform 0.3s ease;
+}
+
+.logo:hover {
+  transform: scale(1.02);
+}
+
+.nav-links {
+  display: flex;
+  gap: 32px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.nav-links a {
+  text-decoration: none;
+  font-weight: 500;
+  color: #334155;
+  transition: all 0.3s ease;
+  font-size: 15px;
+  position: relative;
+}
+
+.nav-links a::after {
+  content: '';
+  position: absolute;
+  bottom: -5px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: linear-gradient(135deg, #4f46e5, #7c3aed);
+  transition: width 0.3s ease;
+}
+
+.nav-links a:hover::after {
+  width: 100%;
+}
+
+.nav-links a:hover {
+  color: #4f46e5;
+}
+
+/* ========== HERO SECTION ========== */
+.hero {
+  padding: 80px 0 60px;
+  background: linear-gradient(135deg, #f5f3ff 0%, #eef2ff 100%);
+  position: relative;
+  overflow: hidden;
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  right: -30%;
+  width: 80%;
+  height: 150%;
+  background: radial-gradient(circle, rgba(79,70,229,0.08) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.hero-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 60px;
+  flex-wrap: wrap;
+}
+
+.hero-left {
+  flex: 1;
+}
+
+.hero-left h1 {
+  font-size: 54px;
+  font-weight: 800;
+  line-height: 1.2;
+  background: linear-gradient(135deg, #1e1b4b, #4f46e5);
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  margin-bottom: 20px;
+}
+
+.hero-left p {
+  font-size: 18px;
+  color: #475569;
+  line-height: 1.6;
+  margin-bottom: 32px;
+  max-width: 500px;
+}
+
+.hero-buttons {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.hero-right {
+  flex: 1;
+  background: linear-gradient(145deg, #ffffff, #f8fafc);
+  border-radius: 48px;
+  padding: 40px;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.15);
+  text-align: center;
+  transition: all 0.4s ease;
+}
+
+.hero-right:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 30px 55px -12px rgba(79, 70, 229, 0.2);
+}
+
+.hero-right .quote-icon {
+  font-size: 48px;
+  color: #4f46e5;
+  opacity: 0.3;
+  margin-bottom: 16px;
+}
+
+.hero-right blockquote {
+  font-size: 20px;
+  font-weight: 500;
+  color: #1e293b;
+  line-height: 1.5;
+  margin-bottom: 20px;
+}
+
+/* ========== STATS SECTION ========== */
+.stats-section {
+  padding: 60px 0;
+  background: white;
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 40px;
+  text-align: center;
+}
+
+.stat-card {
+  padding: 28px 20px;
+  background: #f8fafc;
+  border-radius: 32px;
+  transition: all 0.4s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+  cursor: default;
+  position: relative;
+  overflow: hidden;
+}
+
+.stat-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(79,70,229,0.05), transparent);
+  transition: left 0.5s;
+}
+
+.stat-card:hover::before {
+  left: 100%;
+}
+
+.stat-card:hover {
+  transform: translateY(-8px);
+  background: white;
+  box-shadow: 0 20px 35px -10px rgba(79, 70, 229, 0.15);
+}
+
+.stat-number {
+  font-size: 52px;
+  font-weight: 800;
+  background: linear-gradient(135deg, #4f46e5, #7c3aed);
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+}
+
+.stat-label {
+  font-size: 16px;
+  color: #64748b;
+  margin-top: 10px;
+  font-weight: 500;
+}
+
+/* ========== SOLUTION SECTION ========== */
+.solution {
+  padding: 80px 0;
+  background: #fefce8;
+}
+
+.section-header {
+  text-align: center;
+  margin-bottom: 56px;
+}
+
+.section-header h2 {
+  font-size: 38px;
+  font-weight: 700;
+  margin-bottom: 16px;
+  color: #0f172a;
+}
+
+.section-header p {
+  font-size: 18px;
+  color: #475569;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.solution-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 32px;
+}
+
+.solution-card {
+  background: white;
+  border-radius: 32px;
+  padding: 36px 28px;
+  text-align: center;
+  transition: all 0.4s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+  cursor: default;
+  position: relative;
+  overflow: hidden;
+}
+
+.solution-card::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  background: linear-gradient(135deg, #4f46e5, #7c3aed);
+  transform: scaleX(0);
+  transform-origin: bottom right;
+  transition: transform 0.3s ease;
+}
+
+.solution-card:hover::after {
+  transform: scaleX(1);
+  transform-origin: bottom left;
+}
+
+.solution-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 25px 45px -12px rgba(79, 70, 229, 0.25);
+}
+
+.solution-icon {
+  width: 75px;
+  height: 75px;
+  background: linear-gradient(135deg, #4f46e5, #7c3aed);
+  border-radius: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 24px;
+  font-size: 34px;
+  color: white;
+  transition: all 0.3s ease;
+}
+
+.solution-card:hover .solution-icon {
+  transform: scale(1.05) rotate(5deg);
+}
+
+.solution-card h3 {
+  font-size: 22px;
+  margin-bottom: 12px;
+  color: #0f172a;
+}
+
+.solution-card p {
+  color: #5b6e8c;
+  line-height: 1.6;
+}
+
+/* ========== TOOLS PREVIEW SECTION ========== */
+.tools-preview {
+  padding: 80px 0;
+  background: white;
+}
+
+.tools-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(310px, 1fr));
+  gap: 28px;
+  margin-top: 40px;
+}
+
+.tool-card {
+  background: #f8fafc;
+  border-radius: 28px;
+  padding: 32px 28px;
+  transition: all 0.4s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+  cursor: pointer;
+  border: 1px solid #e2e8f0;
+  position: relative;
+  overflow: hidden;
+}
+
+.tool-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle at var(--x, 50%) var(--y, 50%), rgba(79,70,229,0.08) 0%, transparent 80%);
+  opacity: 0;
+  transition: opacity 0.3s;
+  pointer-events: none;
+}
+
+.tool-card:hover::before {
+  opacity: 1;
+}
+
+.tool-card:hover {
+  transform: translateY(-8px);
+  background: white;
+  box-shadow: 0 20px 40px -12px rgba(79, 70, 229, 0.2);
+  border-color: #4f46e5;
+}
+
+.tool-icon {
+  font-size: 48px;
+  margin-bottom: 22px;
+  transition: transform 0.3s ease;
+}
+
+.tool-card:hover .tool-icon {
+  transform: scale(1.05);
+}
+
+.tool-card h3 {
+  font-size: 20px;
+  margin-bottom: 10px;
+  color: #0f172a;
+}
+
+.tool-card p {
+  color: #64748b;
+  font-size: 14px;
+  line-height: 1.55;
+  margin-bottom: 20px;
+}
+
+.tool-link {
+  color: #4f46e5;
+  font-weight: 600;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.3s ease;
+}
+
+.tool-link i {
+  transition: transform 0.3s ease;
+}
+
+.tool-card:hover .tool-link i {
+  transform: translateX(6px);
+}
+
+/* ========== CTA SECTION ========== */
+.cta-section {
+  padding: 80px 0;
+  background: linear-gradient(135deg, #1e1b4b, #4f46e5);
+  text-align: center;
+  color: white;
+  position: relative;
+  overflow: hidden;
+}
+
+.cta-section::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -20%;
+  width: 140%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(255,255,255,0.08) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.cta-section h2 {
+  font-size: 40px;
+  margin-bottom: 16px;
+  animation: float 4s ease-in-out infinite;
+}
+
+.cta-section p {
+  font-size: 18px;
+  opacity: 0.9;
+  margin-bottom: 32px;
+  max-width: 500px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.cta-section .btn-primary {
+  background: white;
+  color: #4f46e5;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+  animation: glowPulse 2s infinite;
+}
+
+.cta-section .btn-primary:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+}
+
+/* ========== ABOUT SECTION ========== */
+.about-section {
+  padding: 80px 0;
+  background: #f1f5f9;
+}
+
+.about-content {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 48px;
+  align-items: center;
+}
+
+.about-text {
+  flex: 1;
+}
+
+.about-text p {
+  font-size: 17px;
+  line-height: 1.7;
+  color: #334155;
+  margin-bottom: 24px;
+}
+
+.feature-badges {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+  margin-top: 24px;
+}
+
+.feature-badges span {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  color: #4f46e5;
+}
+
+.about-stats-card {
+  flex: 0.6;
+  background: linear-gradient(145deg, #4f46e5, #7c3aed);
+  border-radius: 40px;
+  padding: 45px 35px;
+  text-align: center;
+  color: white;
+  transition: all 0.4s ease;
+  animation: float 5s ease-in-out infinite;
+}
+
+.about-stats-card:hover {
+  transform: translateY(-5px);
+}
+
+.about-stats-card i {
+  font-size: 48px;
+  margin-bottom: 20px;
+}
+
+.about-stats-card h3 {
+  font-size: 48px;
+  font-weight: 800;
+  margin-bottom: 10px;
+}
+
+/* ========== FOOTER ========== */
+footer {
+  background: #0f172a;
+  color: #94a3b8;
+  padding: 48px 0 32px;
+}
+
+.footer-content {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 40px;
+  margin-bottom: 40px;
+}
+
+.footer-logo {
+  font-size: 24px;
+  font-weight: 700;
+  background: linear-gradient(135deg, #a5b4fc, #c7d2fe);
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+}
+
+.footer-links {
+  display: flex;
+  gap: 40px;
+  flex-wrap: wrap;
+}
+
+.footer-links a {
+  color: #cbd5e1;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.footer-links a:hover {
+  color: white;
+  transform: translateY(-2px);
+}
+
+.copyright {
+  text-align: center;
+  padding-top: 32px;
+  border-top: 1px solid #334155;
+  font-size: 13px;
+}
+
+/* ========== LOGIN MODAL ========== */
+.modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(8px);
+  z-index: 1000;
+  justify-content: center;
+  align-items: center;
+  animation: fadeIn 0.3s ease;
+}
+
+.modal.active {
+  display: flex;
+}
+
+.modal-content {
+  background: white;
+  border-radius: 40px;
+  padding: 40px;
+  max-width: 420px;
+  width: 90%;
+  text-align: center;
+  animation: fadeUp 0.4s ease;
+}
+
+.modal-content h2 {
+  margin-bottom: 24px;
+  color: #1e1b4b;
+}
+
+.modal-content input {
+  width: 100%;
+  padding: 14px 18px;
+  margin-bottom: 16px;
+  border: 1.5px solid #e2e8f0;
+  border-radius: 28px;
+  font-family: inherit;
+  transition: all 0.3s ease;
+}
+
+.modal-content input:focus {
+  outline: none;
+  border-color: #4f46e5;
+  box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
+}
+
+.close-modal {
+  float: right;
+  font-size: 28px;
+  cursor: pointer;
+  transition: all 0.2s;
+  color: #94a3b8;
+}
+
+.close-modal:hover {
+  color: #4f46e5;
+  transform: scale(1.1);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .hero-left h1 {
+    font-size: 36px;
+  }
+  .navbar {
+    flex-direction: column;
+  }
+  .nav-links {
+    justify-content: center;
+  }
+  .hero-content {
+    flex-direction: column;
+    text-align: center;
+  }
+  .hero-buttons {
+    justify-content: center;
+  }
+  .section-header h2 {
+    font-size: 28px;
+  }
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="container">
+    <div class="navbar">
+      <div class="logo">
+        <i class="fas fa-bolt"></i> NexusLaunch
+      </div>
+      <div class="nav-links">
+        <a href="#overview">Overview</a>
+        <a href="#stats">Impact</a>
+        <a href="#solution">Solution</a>
+        <a href="#tools">Tools</a>
+        <a href="#about">About</a>
+        <button class="btn-login" id="loginBtn"><i class="fas fa-user-circle"></i> Login</button>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- Hero Section -->
+<section class="hero" id="overview">
+  <div class="container">
+    <div class="hero-content">
+      <div class="hero-left">
+        <h1 class="slide-left">AI-Powered Launchpad for Tomorrow's Unicorns</h1>
+        <p class="slide-left delay-1">NexusLaunch is an end-to-end ecosystem that helps founders validate, pitch, and scale. From idea validation to investor connections — everything you need to succeed.</p>
+        <div class="hero-buttons slide-left delay-2">
+          <button class="btn-primary" onclick="window.location.href='analysis.html'"><i class="fas fa-rocket"></i> Analysis Pitch</button>
+          <button class="btn-outline" onclick="alert('🚀 Join our waitlist for early access!')"><i class="fas fa-calendar-alt"></i> Request Demo</button>
+        </div>
+      </div>
+      <div class="hero-right slide-right delay-1">
+        <div class="quote-icon"><i class="fas fa-quote-right"></i></div>
+        <blockquote>“NexusLaunch transformed our rough idea into an investor-ready pitch. Within 3 months, we secured $500K pre-seed.”</blockquote>
+        <p style="color:#4f46e5; font-weight:600;">— Sarah Chen, Founder of EduMind</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Stats Section -->
+<section class="stats-section" id="stats">
+  <div class="container">
+    <div class="section-header fade-up">
+      <h2>Startup Ecosystem at a Glance</h2>
+      <p>Real data showing why founders need smart tools to stand out</p>
+    </div>
+    <div class="stats-grid">
+      <div class="stat-card fade-up delay-1">
+        <div class="stat-number"><span class="counter" data-target="152">0</span>M+</div>
+        <div class="stat-label">Active Startups Globally</div>
+      </div>
+      <div class="stat-card fade-up delay-2">
+        <div class="stat-number"><span class="counter" data-target="92">0</span>%</div>
+        <div class="stat-label">Startups Fail Due to Poor Pitch</div>
+      </div>
+      <div class="stat-card fade-up delay-3">
+        <div class="stat-number"><span class="counter" data-target="48">0</span>%</div>
+        <div class="stat-label">Faster Fundraising with AI Tools</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Solution Section -->
+<section class="solution" id="solution">
+  <div class="container">
+    <div class="section-header fade-up">
+      <h2>Our Comprehensive Solution</h2>
+      <p>We bridge the gap between raw ideas and investment-ready ventures</p>
+    </div>
+    <div class="solution-grid">
+      <div class="solution-card fade-up delay-1">
+        <div class="solution-icon"><i class="fas fa-brain"></i></div>
+        <h3>AI Validation Engine</h3>
+        <p>Analyze market viability, competition, and growth potential in seconds. Get actionable insights before building anything.</p>
+      </div>
+      <div class="solution-card fade-up delay-2">
+        <div class="solution-icon"><i class="fas fa-chart-line"></i></div>
+        <h3>Smart Pitch Suite</h3>
+        <p>Generate, evaluate, and enhance your pitch deck using AI. Optimize storytelling and financial projections.</p>
+      </div>
+      <div class="solution-card fade-up delay-3">
+        <div class="solution-icon"><i class="fas fa-handshake"></i></div>
+        <h3>Founder-Investor Nexus</h3>
+        <p>Connect with verified founders and 500+ angel investors. Curated matchmaking based on industry and stage.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Tools Preview Section (All 6 Tools with Analyzer Icon) -->
+<section class="tools-preview" id="tools">
+  <div class="container">
+    <div class="section-header fade-up">
+      <h2>Complete Toolkit for Founders</h2>
+      <p>Six powerful modules to accelerate your startup journey</p>
+    </div>
+    <div class="tools-grid">
+      <div class="tool-card fade-up delay-1" onclick="alert('📊 Analyzer Tool: Get instant viability score, market trends, and competitor analysis. (Full tool on separate page)')">
+        <div class="tool-icon"><i class="fas fa-chart-simple"></i> 📊</div>
+        <h3>Idea Analyzer</h3>
+        <p>Get instant viability score, market trends, and competitor analysis using our proprietary AI.</p>
+        <span class="tool-link">Launch Tool <i class="fas fa-arrow-right"></i></span>
+      </div>
+      <div class="tool-card fade-up delay-2" onclick="alert('🎤 Pitch Generator: Generate compelling investor pitches in seconds.')">
+        <div class="tool-icon"><i class="fas fa-pen-fancy"></i> </div>
+        <h3>Pitch Generator</h3>
+        <p>Generate compelling investor pitches tailored to your industry in under 30 seconds.</p>
+        <span class="tool-link">Launch Tool <i class="fas fa-arrow-right"></i></span>
+      </div>
+      <div class="tool-card fade-up delay-3" onclick="alert('📝 Pitch Evaluator: AI scores your pitch clarity and impact.')">
+        <div class="tool-icon"><i class="fas fa-clipboard-list"></i> </div>
+        <h3>Pitch Evaluator</h3>
+        <p>AI scores your pitch clarity, impact, and investor appeal with detailed feedback.</p>
+        <span class="tool-link">Launch Tool <i class="fas fa-arrow-right"></i></span>
+      </div>
+      <div class="tool-card fade-up delay-4" onclick="alert('✨ Pitch Enhancer: Upgrade your pitch with professional storytelling.')">
+        <div class="tool-icon"><i class="fas fa-magic"></i> </div>
+        <h3>Pitch Enhancer</h3>
+        <p>Upgrade your pitch with professional storytelling, metrics integration, and hook optimization.</p>
+        <span class="tool-link">Launch Tool <i class="fas fa-arrow-right"></i></span>
+      </div>
+      <div class="tool-card fade-up delay-5" onclick="alert('👥 Founder Connect: Network with 2,000+ verified founders.')">
+        <div class="tool-icon"><i class="fas fa-users"></i> </div>
+        <h3>Founder Connect</h3>
+        <p>Network with 2,000+ verified founders, co-founders, and mentors across 40+ countries.</p>
+        <span class="tool-link">Join Community <i class="fas fa-arrow-right"></i></span>
+      </div>
+      <div class="tool-card fade-up delay-5" onclick="alert('💰 Investor Connect: Access curated investor database.')">
+        <div class="tool-icon"><i class="fas fa-building"></i> </div>
+        <h3>Investor Connect</h3>
+        <p>Access curated investor database, apply for pitch days, and get introduced to angels & VCs.</p>
+        <span class="tool-link">Meet Investors <i class="fas fa-arrow-right"></i></span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- About Section -->
+<section class="about-section" id="about">
+  <div class="container">
+    <div class="section-header fade-up">
+      <h2>About NexusLaunch</h2>
+      <p>Building the world's most intelligent startup infrastructure</p>
+    </div>
+    <div class="about-content">
+      <div class="about-text fade-up delay-1">
+        <p>Founded by ex-founders and AI researchers, NexusLaunch is on a mission to democratize startup success. We believe that every great idea deserves a fair shot — regardless of background or network.</p>
+        <p>Our platform has helped <strong>1,200+ entrepreneurs</strong> validate concepts, raise over <strong>$8.2M</strong> in seed funding, and build meaningful connections across the globe. We combine cutting-edge AI with genuine human mentorship.</p>
+        <div class="feature-badges">
+          <span><i class="fas fa-check-circle"></i> AI-first approach</span>
+          <span><i class="fas fa-check-circle"></i> Privacy-focused analysis</span>
+          <span><i class="fas fa-check-circle"></i> Global community</span>
+        </div>
+      </div>
+      <div class="about-stats-card fade-up delay-2">
+        <i class="fas fa-chart-line"></i>
+        <h3>89%</h3>
+        <p>of users report improved pitch quality within 2 weeks</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA Section -->
+<section class="cta-section">
+  <div class="container">
+    <h2><i class="fas fa-bolt"></i> Ready to Launch Your Venture?</h2>
+    <p>Join 5,000+ founders who accelerated their journey with NexusLaunch</p>
+    <button class="btn-primary" onclick="alert('🚀 Full tools available on separate page!')"><i class="fas fa-arrow-right"></i> Access All Tools Free →</button>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <div class="footer-content">
+      <div class="footer-logo">⚡ NexusLaunch</div>
+      <div class="footer-links">
+        <a href="#overview">Overview</a>
+        <a href="#stats">Impact</a>
+        <a href="#solution">Solution</a>
+        <a href="#tools">Tools</a>
+        <a href="#about">About</a>
+      </div>
+    </div>
+    <div class="copyright">
+      © 2025 NexusLaunch — AI-Powered Startup Ecosystem. All rights reserved.
+    </div>
+  </div>
+</footer>
+
+<!-- Login Modal -->
+<div id="loginModal" class="modal">
+  <div class="modal-content">
+    <span class="close-modal" id="closeModalBtn">&times;</span>
+    <h2><i class="fas fa-user-astronaut"></i> Welcome Back</h2>
+    <input type="email" placeholder="Email address" id="loginEmail">
+    <input type="password" placeholder="Password" id="loginPassword">
+    <button class="btn-primary" id="doLoginBtn" style="width:100%;"><i class="fas fa-sign-in-alt"></i> Login / Sign Up</button>
+    <p style="margin-top: 20px; font-size:12px; color:#94a3b8;">Demo: any email → instant access</p>
+  </div>
+</div>
+
+<script>
+// Counter Animation
+const counters = document.querySelectorAll('.counter');
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      const counter = entry.target;
+      const target = parseInt(counter.getAttribute('data-target'));
+      let current = 0;
+      const increment = target / 50;
+      const updateCounter = () => {
+        if (current < target) {
+          current += increment;
+          counter.innerText = Math.ceil(current);
+          setTimeout(updateCounter, 20);
+        } else {
+          counter.innerText = target;
+        }
+      };
+      updateCounter();
+      observer.unobserve(counter);
+    }
+  });
+}, { threshold: 0.5 });
+counters.forEach(counter => observer.observe(counter));
+
+// Mouse move effect for tool cards
+document.querySelectorAll('.tool-card').forEach(card => {
+  card.addEventListener('mousemove', (e) => {
+    const rect = card.getBoundingClientRect();
+    const x = ((e.clientX - rect.left) / rect.width) * 100;
+    const y = ((e.clientY - rect.top) / rect.height) * 100;
+    card.style.setProperty('--x', `${x}%`);
+    card.style.setProperty('--y', `${y}%`);
+  });
+});
+
+// Login Modal
+const modal = document.getElementById('loginModal');
+const loginBtn = document.getElementById('loginBtn');
+const closeModal = document.getElementById('closeModalBtn');
+const doLogin = document.getElementById('doLoginBtn');
+
+loginBtn.addEventListener('click', () => modal.classList.add('active'));
+closeModal.addEventListener('click', () => modal.classList.remove('active'));
+doLogin.addEventListener('click', () => {
+  const email = document.getElementById('loginEmail').value;
+  if(email) {
+    alert(`Welcome ${email}! You're now part of NexusLaunch ecosystem.`);
+    modal.classList.remove('active');
+    document.getElementById('loginEmail').value = '';
+    document.getElementById('loginPassword').value = '';
+  } else {
+    alert('Please enter an email to continue.');
+  }
+});
+window.addEventListener('click', (e) => { if(e.target === modal) modal.classList.remove('active'); });
+
+// Smooth scroll for nav links
+document.querySelectorAll('.nav-links a').forEach(anchor => {
+  anchor.addEventListener('click', function(e) {
+    const targetId = this.getAttribute('href');
+    if(targetId && targetId !== '#' && targetId.startsWith('#')) {
+      e.preventDefault();
+      const element = document.querySelector(targetId);
+      if(element) element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  });
+});
+</script>
+</body>
+</html>
