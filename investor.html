@@ -1,0 +1,937 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Investor Connect | NexusLaunch</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body { font-family: 'Inter', sans-serif; background: #fafbff; color: #0f172a; overflow-x: hidden; }
+
+.container { max-width: 1280px; margin: 0 auto; padding: 0 32px; }
+
+@keyframes fadeUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+@keyframes float { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+@keyframes glowPulse { 0% { box-shadow: 0 0 0 0 rgba(79,70,229,0.4); } 70% { box-shadow: 0 0 0 12px rgba(79,70,229,0); } 100% { box-shadow: 0 0 0 0 rgba(79,70,229,0); } }
+@keyframes shimmer { 0% { background-position: -200% 0; } 100% { background-position: 200% 0; } }
+
+.fade-up { animation: fadeUp 0.7s cubic-bezier(0.2,0.9,0.4,1.1) forwards; }
+.delay-1 { animation-delay: 0.1s; opacity: 0; animation-fill-mode: forwards; }
+.delay-2 { animation-delay: 0.2s; opacity: 0; animation-fill-mode: forwards; }
+.delay-3 { animation-delay: 0.3s; opacity: 0; animation-fill-mode: forwards; }
+.delay-4 { animation-delay: 0.4s; opacity: 0; animation-fill-mode: forwards; }
+.delay-5 { animation-delay: 0.5s; opacity: 0; animation-fill-mode: forwards; }
+
+/* Header */
+header {
+  position: sticky; top: 0; z-index: 100;
+  background: rgba(255,255,255,0.96); backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(0,0,0,0.05); padding: 16px 0;
+}
+.navbar { display: flex; justify-content: space-between; align-items: center; gap: 20px; flex-wrap: wrap; }
+.logo { font-size: 26px; font-weight: 800; background: linear-gradient(135deg,#4f46e5,#7c3aed); background-clip: text; -webkit-background-clip: text; color: transparent; display: flex; align-items: center; gap: 8px; text-decoration: none; }
+.nav-links { display: flex; gap: 28px; align-items: center; flex-wrap: wrap; }
+.nav-links a { text-decoration: none; font-weight: 500; color: #334155; font-size: 15px; transition: color 0.2s; }
+.nav-links a:hover { color: #4f46e5; }
+.btn-back { background: transparent; border: 1.5px solid #e2e8f0; padding: 10px 22px; border-radius: 40px; font-weight: 600; font-size: 14px; color: #4f46e5; cursor: pointer; transition: all 0.3s; display: flex; align-items: center; gap: 8px; text-decoration: none; }
+.btn-back:hover { border-color: #4f46e5; background: rgba(79,70,229,0.05); }
+
+/* Hero */
+.hero-section {
+  padding: 90px 0 70px;
+  background: linear-gradient(135deg, #1e1b4b 0%, #4f46e5 60%, #7c3aed 100%);
+  position: relative; overflow: hidden;
+}
+.hero-section::before {
+  content: ''; position: absolute; top: -40%; right: -20%; width: 70%; height: 170%;
+  background: radial-gradient(circle, rgba(255,255,255,0.07) 0%, transparent 70%);
+  pointer-events: none;
+}
+.hero-badge {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.25);
+  color: #e0e7ff; font-size: 13px; font-weight: 600; padding: 8px 18px;
+  border-radius: 40px; margin-bottom: 28px; backdrop-filter: blur(8px);
+}
+.hero-section h1 { font-size: 54px; font-weight: 800; color: white; line-height: 1.15; margin-bottom: 22px; }
+.hero-section h1 span { background: linear-gradient(135deg, #a5b4fc, #e0e7ff); background-clip: text; -webkit-background-clip: text; color: transparent; }
+.hero-section p { font-size: 19px; color: rgba(255,255,255,0.85); line-height: 1.65; max-width: 580px; margin-bottom: 40px; }
+.hero-actions { display: flex; gap: 16px; flex-wrap: wrap; }
+.btn-primary { background: white; border: none; padding: 15px 34px; border-radius: 48px; font-weight: 700; font-size: 15px; color: #4f46e5; cursor: pointer; transition: all 0.3s; display: inline-flex; align-items: center; gap: 10px; box-shadow: 0 8px 25px rgba(0,0,0,0.2); animation: glowPulse 2.5s infinite; }
+.btn-primary:hover { transform: translateY(-3px); box-shadow: 0 16px 35px rgba(0,0,0,0.3); }
+.btn-outline-white { background: transparent; border: 1.5px solid rgba(255,255,255,0.5); padding: 15px 34px; border-radius: 48px; font-weight: 600; font-size: 15px; color: white; cursor: pointer; transition: all 0.3s; display: inline-flex; align-items: center; gap: 10px; }
+.btn-outline-white:hover { background: rgba(255,255,255,0.1); border-color: white; transform: translateY(-2px); }
+
+.hero-stats { display: flex; gap: 40px; flex-wrap: wrap; margin-top: 50px; padding-top: 40px; border-top: 1px solid rgba(255,255,255,0.15); }
+.hero-stat-item { text-align: left; }
+.hero-stat-item .num { font-size: 34px; font-weight: 800; color: white; }
+.hero-stat-item .lbl { font-size: 14px; color: rgba(255,255,255,0.65); margin-top: 4px; font-weight: 500; }
+
+/* Filter / Search Bar */
+.filter-section { padding: 40px 0; background: white; border-bottom: 1px solid #e2e8f0; position: sticky; top: 73px; z-index: 50; }
+.search-row { display: flex; gap: 14px; flex-wrap: wrap; align-items: center; }
+.search-input-wrap { flex: 1; min-width: 240px; position: relative; }
+.search-input-wrap i { position: absolute; left: 18px; top: 50%; transform: translateY(-50%); color: #94a3b8; font-size: 15px; }
+.search-input-wrap input { width: 100%; padding: 14px 18px 14px 46px; border: 1.5px solid #e2e8f0; border-radius: 40px; font-family: inherit; font-size: 15px; transition: all 0.3s; background: #f8fafc; color: #0f172a; }
+.search-input-wrap input:focus { outline: none; border-color: #4f46e5; background: white; box-shadow: 0 0 0 3px rgba(79,70,229,0.1); }
+.filter-select { padding: 14px 20px; border: 1.5px solid #e2e8f0; border-radius: 40px; font-family: inherit; font-size: 14px; background: #f8fafc; color: #334155; cursor: pointer; font-weight: 500; transition: all 0.3s; appearance: none; padding-right: 36px; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%2394a3b8' d='M6 8L1 3h10z'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 14px center; }
+.filter-select:focus { outline: none; border-color: #4f46e5; }
+.filter-tags { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 18px; }
+.filter-tag { padding: 7px 16px; border-radius: 30px; font-size: 13px; font-weight: 600; cursor: pointer; transition: all 0.25s; border: 1.5px solid #e2e8f0; background: white; color: #64748b; }
+.filter-tag:hover, .filter-tag.active { background: linear-gradient(135deg,#4f46e5,#7c3aed); color: white; border-color: transparent; transform: translateY(-1px); }
+.results-count { font-size: 14px; color: #64748b; margin-left: auto; font-weight: 500; }
+
+/* Investor Grid */
+.investors-section { padding: 64px 0; background: #fafbff; }
+.section-header { margin-bottom: 48px; }
+.section-header h2 { font-size: 36px; font-weight: 700; color: #0f172a; margin-bottom: 10px; }
+.section-header p { font-size: 17px; color: #475569; }
+
+.investors-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 26px; }
+.investor-card {
+  background: white; border-radius: 28px; padding: 30px 26px;
+  border: 1px solid #e8edf5; transition: all 0.35s cubic-bezier(0.2,0.9,0.4,1.1);
+  cursor: default; position: relative; overflow: hidden;
+}
+.investor-card::before {
+  content: ''; position: absolute; bottom: 0; left: 0; width: 100%; height: 3px;
+  background: linear-gradient(135deg,#4f46e5,#7c3aed);
+  transform: scaleX(0); transform-origin: left; transition: transform 0.3s;
+}
+.investor-card:hover::before { transform: scaleX(1); }
+.investor-card:hover { transform: translateY(-8px); box-shadow: 0 24px 48px -12px rgba(79,70,229,0.18); border-color: #c7d2fe; }
+
+.card-top { display: flex; align-items: flex-start; gap: 16px; margin-bottom: 20px; }
+.investor-avatar {
+  width: 60px; height: 60px; border-radius: 20px; flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 22px; font-weight: 800; color: white;
+}
+.av-purple { background: linear-gradient(135deg,#4f46e5,#7c3aed); }
+.av-teal { background: linear-gradient(135deg,#0d9488,#0f766e); }
+.av-coral { background: linear-gradient(135deg,#f97316,#ea580c); }
+.av-pink { background: linear-gradient(135deg,#ec4899,#db2777); }
+.av-blue { background: linear-gradient(135deg,#3b82f6,#2563eb); }
+.av-green { background: linear-gradient(135deg,#22c55e,#16a34a); }
+.av-amber { background: linear-gradient(135deg,#f59e0b,#d97706); }
+.av-rose { background: linear-gradient(135deg,#f43f5e,#e11d48); }
+
+.investor-meta { flex: 1; min-width: 0; }
+.investor-name { font-size: 18px; font-weight: 700; color: #0f172a; margin-bottom: 3px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.investor-title { font-size: 13px; color: #64748b; margin-bottom: 8px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.verified-badge { display: inline-flex; align-items: center; gap: 5px; background: #f0fdf4; color: #16a34a; font-size: 11px; font-weight: 600; padding: 3px 10px; border-radius: 20px; }
+
+.investor-focus { display: flex; gap: 7px; flex-wrap: wrap; margin-bottom: 16px; }
+.focus-tag { background: #eef2ff; color: #4f46e5; font-size: 12px; font-weight: 600; padding: 4px 12px; border-radius: 20px; }
+
+.investor-bio { font-size: 14px; color: #475569; line-height: 1.6; margin-bottom: 20px; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+
+.investor-stats { display: flex; gap: 20px; padding: 16px 0; border-top: 1px solid #f1f5f9; border-bottom: 1px solid #f1f5f9; margin-bottom: 20px; }
+.inv-stat { text-align: center; flex: 1; }
+.inv-stat .val { font-size: 18px; font-weight: 700; color: #0f172a; }
+.inv-stat .key { font-size: 11px; color: #94a3b8; font-weight: 500; margin-top: 2px; }
+
+.card-actions { display: flex; gap: 10px; }
+.btn-connect { flex: 1; background: linear-gradient(135deg,#4f46e5,#7c3aed); color: white; border: none; padding: 11px 0; border-radius: 30px; font-weight: 600; font-size: 14px; cursor: pointer; transition: all 0.3s; display: flex; align-items: center; justify-content: center; gap: 8px; }
+.btn-connect:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(79,70,229,0.35); }
+.btn-save { width: 44px; height: 44px; border-radius: 50%; border: 1.5px solid #e2e8f0; background: white; color: #94a3b8; cursor: pointer; transition: all 0.3s; display: flex; align-items: center; justify-content: center; font-size: 15px; }
+.btn-save:hover, .btn-save.saved { border-color: #f43f5e; color: #f43f5e; background: #fff1f2; }
+
+/* Featured Investor */
+.featured-section { padding: 56px 0; background: white; }
+.featured-card {
+  background: linear-gradient(135deg,#1e1b4b,#4f46e5);
+  border-radius: 40px; padding: 50px; color: white;
+  display: flex; align-items: center; gap: 48px; flex-wrap: wrap;
+  position: relative; overflow: hidden;
+}
+.featured-card::after {
+  content: ''; position: absolute; top: -30%; right: -10%; width: 50%; height: 160%;
+  background: radial-gradient(circle, rgba(255,255,255,0.08) 0%, transparent 70%);
+}
+.featured-badge { display: inline-flex; align-items: center; gap: 6px; background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.25); color: #e0e7ff; font-size: 12px; font-weight: 700; padding: 6px 16px; border-radius: 30px; margin-bottom: 16px; }
+.featured-avatar { width: 100px; height: 100px; border-radius: 28px; background: rgba(255,255,255,0.2); display: flex; align-items: center; justify-content: center; font-size: 38px; font-weight: 800; color: white; flex-shrink: 0; border: 2px solid rgba(255,255,255,0.25); animation: float 5s ease-in-out infinite; }
+.featured-info { flex: 1; }
+.featured-info h3 { font-size: 30px; font-weight: 800; margin-bottom: 4px; }
+.featured-info .role { font-size: 16px; color: rgba(255,255,255,0.75); margin-bottom: 20px; }
+.featured-info p { font-size: 16px; color: rgba(255,255,255,0.85); line-height: 1.65; max-width: 480px; margin-bottom: 28px; }
+.featured-quick-stats { display: flex; gap: 32px; flex-wrap: wrap; margin-bottom: 28px; }
+.fq-stat .num { font-size: 26px; font-weight: 800; }
+.fq-stat .lbl { font-size: 12px; color: rgba(255,255,255,0.65); margin-top: 2px; }
+.btn-feature-connect { background: white; color: #4f46e5; border: none; padding: 14px 32px; border-radius: 40px; font-weight: 700; font-size: 15px; cursor: pointer; transition: all 0.3s; display: inline-flex; align-items: center; gap: 10px; }
+.btn-feature-connect:hover { transform: translateY(-3px); box-shadow: 0 12px 28px rgba(0,0,0,0.25); }
+
+/* Pitch Days */
+.pitchday-section { padding: 64px 0; background: #f8fafc; }
+.pitchday-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 24px; margin-top: 40px; }
+.pitchday-card {
+  background: white; border-radius: 24px; overflow: hidden;
+  border: 1px solid #e8edf5; transition: all 0.35s;
+}
+.pitchday-card:hover { transform: translateY(-6px); box-shadow: 0 20px 40px -12px rgba(79,70,229,0.15); }
+.pd-header { padding: 24px 24px 0; display: flex; justify-content: space-between; align-items: flex-start; }
+.pd-badge { display: inline-flex; align-items: center; gap: 6px; font-size: 12px; font-weight: 700; padding: 5px 14px; border-radius: 20px; }
+.pd-badge.open { background: #f0fdf4; color: #16a34a; }
+.pd-badge.upcoming { background: #eff6ff; color: #2563eb; }
+.pd-badge.closing { background: #fff7ed; color: #c2410c; }
+.pd-date { font-size: 13px; color: #94a3b8; font-weight: 500; display: flex; align-items: center; gap: 6px; }
+.pd-body { padding: 20px 24px 24px; }
+.pd-title { font-size: 20px; font-weight: 700; color: #0f172a; margin-bottom: 8px; }
+.pd-org { font-size: 14px; color: #64748b; margin-bottom: 16px; display: flex; align-items: center; gap: 6px; }
+.pd-details { display: flex; gap: 16px; flex-wrap: wrap; margin-bottom: 20px; }
+.pd-detail { font-size: 13px; color: #475569; display: flex; align-items: center; gap: 6px; }
+.pd-detail i { color: #4f46e5; }
+.pd-spots { background: #f1f5f9; border-radius: 12px; padding: 12px 16px; display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
+.pd-spots-label { font-size: 13px; color: #64748b; font-weight: 500; }
+.pd-spots-bar { flex: 1; margin: 0 14px; height: 6px; background: #e2e8f0; border-radius: 10px; overflow: hidden; }
+.pd-spots-fill { height: 100%; border-radius: 10px; background: linear-gradient(135deg,#4f46e5,#7c3aed); }
+.pd-spots-num { font-size: 13px; font-weight: 700; color: #0f172a; }
+.btn-apply { width: 100%; background: linear-gradient(135deg,#4f46e5,#7c3aed); color: white; border: none; padding: 13px; border-radius: 24px; font-weight: 600; font-size: 14px; cursor: pointer; transition: all 0.3s; display: flex; align-items: center; justify-content: center; gap: 8px; }
+.btn-apply:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(79,70,229,0.3); }
+.btn-apply.disabled { background: #e2e8f0; color: #94a3b8; cursor: not-allowed; transform: none; box-shadow: none; }
+
+/* How it works */
+.how-section { padding: 72px 0; background: white; }
+.steps-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 32px; margin-top: 56px; position: relative; }
+.step-card { text-align: center; padding: 36px 24px; border-radius: 28px; background: #f8fafc; transition: all 0.35s; cursor: default; }
+.step-card:hover { transform: translateY(-8px); background: white; box-shadow: 0 20px 38px -10px rgba(79,70,229,0.15); }
+.step-num { width: 52px; height: 52px; background: linear-gradient(135deg,#4f46e5,#7c3aed); border-radius: 18px; display: flex; align-items: center; justify-content: center; font-size: 20px; font-weight: 800; color: white; margin: 0 auto 20px; }
+.step-card h3 { font-size: 18px; font-weight: 700; margin-bottom: 10px; color: #0f172a; }
+.step-card p { font-size: 14px; color: #64748b; line-height: 1.6; }
+
+/* Testimonials */
+.testimonials-section { padding: 72px 0; background: linear-gradient(135deg,#f5f3ff,#eef2ff); }
+.testimonials-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px; margin-top: 48px; }
+.testimonial-card { background: white; border-radius: 24px; padding: 28px 26px; border: 1px solid #e8edf5; transition: all 0.3s; }
+.testimonial-card:hover { transform: translateY(-5px); box-shadow: 0 16px 30px -10px rgba(79,70,229,0.12); }
+.tc-stars { color: #f59e0b; font-size: 14px; margin-bottom: 14px; }
+.tc-quote { font-size: 15px; color: #334155; line-height: 1.7; margin-bottom: 20px; font-style: italic; }
+.tc-author { display: flex; align-items: center; gap: 12px; }
+.tc-avatar { width: 42px; height: 42px; border-radius: 14px; display: flex; align-items: center; justify-content: center; font-size: 14px; font-weight: 700; color: white; flex-shrink: 0; }
+.tc-name { font-size: 14px; font-weight: 700; color: #0f172a; }
+.tc-role { font-size: 12px; color: #64748b; }
+.tc-raised { display: inline-flex; align-items: center; gap: 5px; background: #f0fdf4; color: #16a34a; font-size: 11px; font-weight: 700; padding: 3px 10px; border-radius: 20px; margin-top: 4px; }
+
+/* CTA */
+.cta-section { padding: 80px 0; background: linear-gradient(135deg,#1e1b4b,#4f46e5); text-align: center; color: white; position: relative; overflow: hidden; }
+.cta-section::before { content: ''; position: absolute; top: -50%; left: -20%; width: 140%; height: 200%; background: radial-gradient(circle, rgba(255,255,255,0.07) 0%, transparent 70%); }
+.cta-section h2 { font-size: 42px; font-weight: 800; margin-bottom: 16px; }
+.cta-section p { font-size: 18px; opacity: 0.85; margin-bottom: 36px; max-width: 500px; margin-left: auto; margin-right: auto; }
+
+/* Footer */
+footer { background: #0f172a; color: #94a3b8; padding: 48px 0 32px; }
+.footer-content { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 40px; margin-bottom: 40px; }
+.footer-logo { font-size: 22px; font-weight: 700; background: linear-gradient(135deg,#a5b4fc,#c7d2fe); background-clip: text; -webkit-background-clip: text; color: transparent; }
+.footer-links { display: flex; gap: 36px; flex-wrap: wrap; }
+.footer-links a { color: #cbd5e1; text-decoration: none; transition: color 0.2s; font-size: 14px; }
+.footer-links a:hover { color: white; }
+.copyright { text-align: center; padding-top: 28px; border-top: 1px solid #334155; font-size: 13px; }
+
+/* Modal */
+.modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); backdrop-filter: blur(8px); z-index: 1000; justify-content: center; align-items: center; }
+.modal.active { display: flex; animation: fadeIn 0.3s ease; }
+.modal-content { background: white; border-radius: 36px; padding: 44px 40px; max-width: 480px; width: 92%; animation: fadeUp 0.4s ease forwards; position: relative; }
+.modal-close { position: absolute; top: 20px; right: 24px; font-size: 26px; cursor: pointer; color: #94a3b8; transition: all 0.2s; background: none; border: none; }
+.modal-close:hover { color: #4f46e5; transform: scale(1.1); }
+.modal-content h2 { font-size: 26px; font-weight: 800; color: #1e1b4b; margin-bottom: 6px; }
+.modal-content .subtitle { font-size: 15px; color: #64748b; margin-bottom: 28px; }
+.form-group { margin-bottom: 18px; }
+.form-group label { display: block; font-size: 13px; font-weight: 600; color: #334155; margin-bottom: 8px; }
+.form-group input, .form-group textarea, .form-group select { width: 100%; padding: 13px 18px; border: 1.5px solid #e2e8f0; border-radius: 24px; font-family: inherit; font-size: 14px; transition: all 0.3s; color: #0f172a; }
+.form-group textarea { resize: vertical; min-height: 100px; border-radius: 18px; }
+.form-group input:focus, .form-group textarea:focus, .form-group select:focus { outline: none; border-color: #4f46e5; box-shadow: 0 0 0 3px rgba(79,70,229,0.1); }
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.btn-submit { width: 100%; background: linear-gradient(135deg,#4f46e5,#7c3aed); color: white; border: none; padding: 15px; border-radius: 30px; font-weight: 700; font-size: 15px; cursor: pointer; transition: all 0.3s; margin-top: 8px; }
+.btn-submit:hover { transform: translateY(-2px); box-shadow: 0 10px 24px rgba(79,70,229,0.35); }
+
+/* Toast */
+.toast { position: fixed; bottom: 30px; right: 30px; background: #0f172a; color: white; padding: 16px 24px; border-radius: 20px; font-size: 14px; font-weight: 600; z-index: 2000; display: flex; align-items: center; gap: 10px; transform: translateY(80px); opacity: 0; transition: all 0.4s cubic-bezier(0.2,0.9,0.4,1.1); }
+.toast.show { transform: translateY(0); opacity: 1; }
+.toast i { color: #4ade80; }
+
+/* Scroll animations via IntersectionObserver */
+.reveal { opacity: 0; transform: translateY(28px); transition: all 0.7s cubic-bezier(0.2,0.9,0.4,1.1); }
+.reveal.visible { opacity: 1; transform: translateY(0); }
+
+@media (max-width: 768px) {
+  .hero-section h1 { font-size: 34px; }
+  .hero-stats { gap: 24px; }
+  .featured-card { flex-direction: column; }
+  .form-row { grid-template-columns: 1fr; }
+  .navbar { flex-direction: column; }
+  .nav-links { justify-content: center; }
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="container">
+    <div class="navbar">
+      <a href="index.html" class="logo"><i class="fas fa-bolt"></i> NexusLaunch</a>
+      <div class="nav-links">
+        <a href="index.html#overview">Overview</a>
+        <a href="index.html#tools">Tools</a>
+        <a href="#investors">Investors</a>
+        <a href="#pitch-days">Pitch Days</a>
+        <a href="index.html" class="btn-back"><i class="fas fa-arrow-left"></i> Back to Home</a>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- Hero -->
+<section class="hero-section">
+  <div class="container">
+    <div style="max-width:720px;">
+      <div class="hero-badge fade-up"><i class="fas fa-shield-alt"></i> 500+ Verified Investors</div>
+      <h1 class="fade-up delay-1">Connect With The Right<br><span>Investors for Your Startup</span></h1>
+      <p class="fade-up delay-2">Access a curated network of angels, VCs, and family offices actively looking to fund startups like yours. Smart matchmaking based on your stage, sector, and traction.</p>
+      <div class="hero-actions fade-up delay-3">
+        <button class="btn-primary" onclick="openConnectModal()"><i class="fas fa-paper-plane"></i> Apply for Intro</button>
+        <button class="btn-outline-white" onclick="scrollTo('pitch-days')"><i class="fas fa-calendar-check"></i> View Pitch Days</button>
+      </div>
+      <div class="hero-stats fade-up delay-4">
+        <div class="hero-stat-item">
+          <div class="num">500+</div>
+          <div class="lbl">Verified Investors</div>
+        </div>
+        <div class="hero-stat-item">
+          <div class="num">$8.2M</div>
+          <div class="lbl">Raised by Founders</div>
+        </div>
+        <div class="hero-stat-item">
+          <div class="num">40+</div>
+          <div class="lbl">Countries Covered</div>
+        </div>
+        <div class="hero-stat-item">
+          <div class="num">72h</div>
+          <div class="lbl">Avg. Intro Time</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Filter Section -->
+<div class="filter-section" id="investors">
+  <div class="container">
+    <div class="search-row">
+      <div class="search-input-wrap">
+        <i class="fas fa-search"></i>
+        <input type="text" placeholder="Search investors by name, firm, or focus..." id="searchInput" oninput="filterInvestors()">
+      </div>
+      <select class="filter-select" id="stageFilter" onchange="filterInvestors()">
+        <option value="">All Stages</option>
+        <option value="Pre-Seed">Pre-Seed</option>
+        <option value="Seed">Seed</option>
+        <option value="Series A">Series A</option>
+        <option value="Series B">Series B+</option>
+      </select>
+      <select class="filter-select" id="sectorFilter" onchange="filterInvestors()">
+        <option value="">All Sectors</option>
+        <option value="SaaS">SaaS</option>
+        <option value="Fintech">Fintech</option>
+        <option value="HealthTech">HealthTech</option>
+        <option value="EdTech">EdTech</option>
+        <option value="DeepTech">DeepTech</option>
+        <option value="CleanTech">CleanTech</option>
+      </select>
+      <span class="results-count" id="resultsCount">Showing 12 investors</span>
+    </div>
+    <div class="filter-tags">
+      <span class="filter-tag active" onclick="setTag(this,'')">All</span>
+      <span class="filter-tag" onclick="setTag(this,'Angel')">Angel</span>
+      <span class="filter-tag" onclick="setTag(this,'VC')">VC</span>
+      <span class="filter-tag" onclick="setTag(this,'Family Office')">Family Office</span>
+      <span class="filter-tag" onclick="setTag(this,'Corporate VC')">Corporate VC</span>
+      <span class="filter-tag" onclick="setTag(this,'Impact')">Impact Investor</span>
+      <span class="filter-tag" onclick="setTag(this,'India')">India</span>
+      <span class="filter-tag" onclick="setTag(this,'US')">US</span>
+      <span class="filter-tag" onclick="setTag(this,'EU')">Europe</span>
+    </div>
+  </div>
+</div>
+
+<!-- Featured Investor Spotlight -->
+<section class="featured-section">
+  <div class="container">
+    <div class="featured-card reveal">
+      <div class="featured-avatar">RK</div>
+      <div class="featured-info">
+        <div class="featured-badge"><i class="fas fa-star"></i> Investor Spotlight</div>
+        <h3>Rohan Kapoor</h3>
+        <div class="role">General Partner · Nexus Venture Partners</div>
+        <div class="featured-quick-stats">
+          <div class="fq-stat"><div class="num">$150M</div><div class="lbl">Funds Managed</div></div>
+          <div class="fq-stat"><div class="num">62</div><div class="lbl">Portfolio Co's</div></div>
+          <div class="fq-stat"><div class="num">8</div><div class="lbl">Unicorns Backed</div></div>
+          <div class="fq-stat"><div class="num">Seed–A</div><div class="lbl">Sweet Spot</div></div>
+        </div>
+        <p>Rohan focuses on B2B SaaS, Fintech, and AI-native companies across South Asia and Southeast Asia. Currently accepting warm intros for Seed and Series A rounds with 6-month runway or more.</p>
+        <button class="btn-feature-connect" onclick="openConnectModal('Rohan Kapoor')"><i class="fas fa-envelope"></i> Request Introduction</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Investors Grid -->
+<section class="investors-section">
+  <div class="container">
+    <div class="section-header reveal">
+      <h2>Browse Investors</h2>
+      <p>All investors are verified and actively sourcing deals through NexusLaunch</p>
+    </div>
+    <div class="investors-grid" id="investorsGrid">
+
+      <div class="investor-card reveal" data-type="Angel" data-stage="Pre-Seed" data-sector="SaaS FinTech" data-region="India">
+        <div class="card-top">
+          <div class="investor-avatar av-purple">AS</div>
+          <div class="investor-meta">
+            <div class="investor-name">Ananya Sharma</div>
+            <div class="investor-title">Angel Investor · Ex-Flipkart VP</div>
+            <span class="verified-badge"><i class="fas fa-check-circle"></i> Verified</span>
+          </div>
+        </div>
+        <div class="investor-focus">
+          <span class="focus-tag">SaaS</span><span class="focus-tag">Fintech</span><span class="focus-tag">Pre-Seed</span>
+        </div>
+        <div class="investor-bio">Former VP of Product at Flipkart. Investing in early-stage B2B SaaS and fintech startups across India. Brings deep operational expertise and strong network with enterprise buyers.</div>
+        <div class="investor-stats">
+          <div class="inv-stat"><div class="val">$250K</div><div class="key">Avg Ticket</div></div>
+          <div class="inv-stat"><div class="val">18</div><div class="key">Portfolio</div></div>
+          <div class="inv-stat"><div class="val">India</div><div class="key">Geography</div></div>
+        </div>
+        <div class="card-actions">
+          <button class="btn-connect" onclick="openConnectModal('Ananya Sharma')"><i class="fas fa-paper-plane"></i> Request Intro</button>
+          <button class="btn-save" onclick="toggleSave(this)" title="Save investor"><i class="fas fa-heart"></i></button>
+        </div>
+      </div>
+
+      <div class="investor-card reveal" data-type="VC" data-stage="Seed" data-sector="HealthTech DeepTech" data-region="US">
+        <div class="card-top">
+          <div class="investor-avatar av-blue">MT</div>
+          <div class="investor-meta">
+            <div class="investor-name">Michael Torres</div>
+            <div class="investor-title">Partner · Sequoia Scout</div>
+            <span class="verified-badge"><i class="fas fa-check-circle"></i> Verified</span>
+          </div>
+        </div>
+        <div class="investor-focus">
+          <span class="focus-tag">HealthTech</span><span class="focus-tag">DeepTech</span><span class="focus-tag">Seed</span>
+        </div>
+        <div class="investor-bio">Sequoia Scout program partner with a focus on healthcare innovation and deep tech. Previously built and sold a medical device startup. Thesis: AI + Biology convergence.</div>
+        <div class="investor-stats">
+          <div class="inv-stat"><div class="val">$500K</div><div class="key">Avg Ticket</div></div>
+          <div class="inv-stat"><div class="val">31</div><div class="key">Portfolio</div></div>
+          <div class="inv-stat"><div class="val">US/EU</div><div class="key">Geography</div></div>
+        </div>
+        <div class="card-actions">
+          <button class="btn-connect" onclick="openConnectModal('Michael Torres')"><i class="fas fa-paper-plane"></i> Request Intro</button>
+          <button class="btn-save" onclick="toggleSave(this)" title="Save investor"><i class="fas fa-heart"></i></button>
+        </div>
+      </div>
+
+      <div class="investor-card reveal" data-type="Impact" data-stage="Seed" data-sector="CleanTech EdTech" data-region="EU">
+        <div class="card-top">
+          <div class="investor-avatar av-teal">PV</div>
+          <div class="investor-meta">
+            <div class="investor-name">Priya Venkatesh</div>
+            <div class="investor-title">Impact Investor · Acumen Fund</div>
+            <span class="verified-badge"><i class="fas fa-check-circle"></i> Verified</span>
+          </div>
+        </div>
+        <div class="investor-focus">
+          <span class="focus-tag">CleanTech</span><span class="focus-tag">EdTech</span><span class="focus-tag">Impact</span>
+        </div>
+        <div class="investor-bio">Dedicated to funding ventures with measurable social and environmental impact. Specialises in climate tech and education equity. Strong ties to EU impact investment ecosystem.</div>
+        <div class="investor-stats">
+          <div class="inv-stat"><div class="val">$300K</div><div class="key">Avg Ticket</div></div>
+          <div class="inv-stat"><div class="val">24</div><div class="key">Portfolio</div></div>
+          <div class="inv-stat"><div class="val">Global</div><div class="key">Geography</div></div>
+        </div>
+        <div class="card-actions">
+          <button class="btn-connect" onclick="openConnectModal('Priya Venkatesh')"><i class="fas fa-paper-plane"></i> Request Intro</button>
+          <button class="btn-save" onclick="toggleSave(this)" title="Save investor"><i class="fas fa-heart"></i></button>
+        </div>
+      </div>
+
+      <div class="investor-card reveal" data-type="VC" data-stage="Series A" data-sector="SaaS FinTech" data-region="India">
+        <div class="card-top">
+          <div class="investor-avatar av-amber">VK</div>
+          <div class="investor-meta">
+            <div class="investor-name">Vikram Kohli</div>
+            <div class="investor-title">MD · Blume Ventures</div>
+            <span class="verified-badge"><i class="fas fa-check-circle"></i> Verified</span>
+          </div>
+        </div>
+        <div class="investor-focus">
+          <span class="focus-tag">SaaS</span><span class="focus-tag">Series A</span><span class="focus-tag">India</span>
+        </div>
+        <div class="investor-bio">Managing Director at Blume Ventures with $100M+ AUM. Focuses on India-first SaaS companies with global expansion potential. 3 unicorns in portfolio including Unacademy.</div>
+        <div class="investor-stats">
+          <div class="inv-stat"><div class="val">$2M</div><div class="key">Avg Ticket</div></div>
+          <div class="inv-stat"><div class="val">48</div><div class="key">Portfolio</div></div>
+          <div class="inv-stat"><div class="val">India</div><div class="key">Geography</div></div>
+        </div>
+        <div class="card-actions">
+          <button class="btn-connect" onclick="openConnectModal('Vikram Kohli')"><i class="fas fa-paper-plane"></i> Request Intro</button>
+          <button class="btn-save" onclick="toggleSave(this)" title="Save investor"><i class="fas fa-heart"></i></button>
+        </div>
+      </div>
+
+      <div class="investor-card reveal" data-type="Angel" data-stage="Pre-Seed" data-sector="EdTech HealthTech" data-region="US">
+        <div class="card-top">
+          <div class="investor-avatar av-pink">LC</div>
+          <div class="investor-meta">
+            <div class="investor-name">Laura Chen</div>
+            <div class="investor-title">Angel · Ex-Google PM</div>
+            <span class="verified-badge"><i class="fas fa-check-circle"></i> Verified</span>
+          </div>
+        </div>
+        <div class="investor-focus">
+          <span class="focus-tag">EdTech</span><span class="focus-tag">Consumer</span><span class="focus-tag">Pre-Seed</span>
+        </div>
+        <div class="investor-bio">Former Google Product Manager with 12 years building consumer products. Angel investing in EdTech, health consumer, and future-of-work startups. Co-leads rounds with other angels.</div>
+        <div class="investor-stats">
+          <div class="inv-stat"><div class="val">$100K</div><div class="key">Avg Ticket</div></div>
+          <div class="inv-stat"><div class="val">14</div><div class="key">Portfolio</div></div>
+          <div class="inv-stat"><div class="val">US</div><div class="key">Geography</div></div>
+        </div>
+        <div class="card-actions">
+          <button class="btn-connect" onclick="openConnectModal('Laura Chen')"><i class="fas fa-paper-plane"></i> Request Intro</button>
+          <button class="btn-save" onclick="toggleSave(this)" title="Save investor"><i class="fas fa-heart"></i></button>
+        </div>
+      </div>
+
+      <div class="investor-card reveal" data-type="Corporate VC" data-stage="Series A" data-sector="DeepTech SaaS" data-region="EU">
+        <div class="card-top">
+          <div class="investor-avatar av-green">FM</div>
+          <div class="investor-meta">
+            <div class="investor-name">François Martin</div>
+            <div class="investor-title">Principal · Salesforce Ventures</div>
+            <span class="verified-badge"><i class="fas fa-check-circle"></i> Verified</span>
+          </div>
+        </div>
+        <div class="investor-focus">
+          <span class="focus-tag">Enterprise SaaS</span><span class="focus-tag">AI</span><span class="focus-tag">Series A</span>
+        </div>
+        <div class="investor-bio">Backing enterprise SaaS companies building on or alongside the Salesforce ecosystem. Brings strategic value through distribution to Salesforce's 150,000+ enterprise customers.</div>
+        <div class="investor-stats">
+          <div class="inv-stat"><div class="val">$3M</div><div class="key">Avg Ticket</div></div>
+          <div class="inv-stat"><div class="val">37</div><div class="key">Portfolio</div></div>
+          <div class="inv-stat"><div class="val">Global</div><div class="key">Geography</div></div>
+        </div>
+        <div class="card-actions">
+          <button class="btn-connect" onclick="openConnectModal('François Martin')"><i class="fas fa-paper-plane"></i> Request Intro</button>
+          <button class="btn-save" onclick="toggleSave(this)" title="Save investor"><i class="fas fa-heart"></i></button>
+        </div>
+      </div>
+
+      <div class="investor-card reveal" data-type="Family Office" data-stage="Seed" data-sector="FinTech CleanTech" data-region="India">
+        <div class="card-top">
+          <div class="investor-avatar av-rose">NR</div>
+          <div class="investor-meta">
+            <div class="investor-name">Nisha Reddy</div>
+            <div class="investor-title">Investment Director · Reddy Family Office</div>
+            <span class="verified-badge"><i class="fas fa-check-circle"></i> Verified</span>
+          </div>
+        </div>
+        <div class="investor-focus">
+          <span class="focus-tag">Fintech</span><span class="focus-tag">CleanTech</span><span class="focus-tag">Seed</span>
+        </div>
+        <div class="investor-bio">Managing a multi-generational family office with a startup portfolio across fintech and sustainability. Patient capital with 7-10 year investment horizon. Loves mission-driven founders.</div>
+        <div class="investor-stats">
+          <div class="inv-stat"><div class="val">$750K</div><div class="key">Avg Ticket</div></div>
+          <div class="inv-stat"><div class="val">22</div><div class="key">Portfolio</div></div>
+          <div class="inv-stat"><div class="val">India/SEA</div><div class="key">Geography</div></div>
+        </div>
+        <div class="card-actions">
+          <button class="btn-connect" onclick="openConnectModal('Nisha Reddy')"><i class="fas fa-paper-plane"></i> Request Intro</button>
+          <button class="btn-save" onclick="toggleSave(this)" title="Save investor"><i class="fas fa-heart"></i></button>
+        </div>
+      </div>
+
+      <div class="investor-card reveal" data-type="VC" data-stage="Series B" data-sector="HealthTech" data-region="US">
+        <div class="card-top">
+          <div class="investor-avatar av-teal">JW</div>
+          <div class="investor-meta">
+            <div class="investor-name">James Walsh</div>
+            <div class="investor-title">GP · Andreessen Horowitz Bio Fund</div>
+            <span class="verified-badge"><i class="fas fa-check-circle"></i> Verified</span>
+          </div>
+        </div>
+        <div class="investor-focus">
+          <span class="focus-tag">HealthTech</span><span class="focus-tag">BioTech</span><span class="focus-tag">Series B+</span>
+        </div>
+        <div class="investor-bio">Leading health and biotech investments at a16z. Focused on the intersection of AI and biology. Particularly interested in computational drug discovery and digital health infrastructure.</div>
+        <div class="investor-stats">
+          <div class="inv-stat"><div class="val">$10M</div><div class="key">Avg Ticket</div></div>
+          <div class="inv-stat"><div class="val">29</div><div class="key">Portfolio</div></div>
+          <div class="inv-stat"><div class="val">US/EU</div><div class="key">Geography</div></div>
+        </div>
+        <div class="card-actions">
+          <button class="btn-connect" onclick="openConnectModal('James Walsh')"><i class="fas fa-paper-plane"></i> Request Intro</button>
+          <button class="btn-save" onclick="toggleSave(this)" title="Save investor"><i class="fas fa-heart"></i></button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- Pitch Days -->
+<section class="pitchday-section" id="pitch-days">
+  <div class="container">
+    <div class="section-header reveal">
+      <h2>Upcoming Pitch Days</h2>
+      <p>Apply to pitch live in front of panels of investors — curated by sector and stage</p>
+    </div>
+    <div class="pitchday-grid">
+
+      <div class="pitchday-card reveal">
+        <div class="pd-header">
+          <span class="pd-badge open"><i class="fas fa-circle" style="font-size:8px;"></i> Open</span>
+          <div class="pd-date"><i class="fas fa-calendar"></i> April 22, 2026</div>
+        </div>
+        <div class="pd-body">
+          <div class="pd-title">SaaS & AI Demo Day</div>
+          <div class="pd-org"><i class="fas fa-building"></i> Hosted by NexusLaunch × Y Combinator Alumni</div>
+          <div class="pd-details">
+            <div class="pd-detail"><i class="fas fa-video"></i> Virtual (Zoom)</div>
+            <div class="pd-detail"><i class="fas fa-clock"></i> 5 min pitch + 10 min Q&A</div>
+            <div class="pd-detail"><i class="fas fa-users"></i> 12 Investors Panel</div>
+          </div>
+          <div class="pd-spots">
+            <span class="pd-spots-label">Spots Remaining</span>
+            <div class="pd-spots-bar"><div class="pd-spots-fill" style="width:65%"></div></div>
+            <span class="pd-spots-num">7 left</span>
+          </div>
+          <button class="btn-apply" onclick="applyPitchDay(this, 'SaaS & AI Demo Day')"><i class="fas fa-rocket"></i> Apply Now</button>
+        </div>
+      </div>
+
+      <div class="pitchday-card reveal">
+        <div class="pd-header">
+          <span class="pd-badge open"><i class="fas fa-circle" style="font-size:8px;"></i> Open</span>
+          <div class="pd-date"><i class="fas fa-calendar"></i> May 3, 2026</div>
+        </div>
+        <div class="pd-body">
+          <div class="pd-title">India Fintech Founders Summit</div>
+          <div class="pd-org"><i class="fas fa-building"></i> NexusLaunch × NASSCOM</div>
+          <div class="pd-details">
+            <div class="pd-detail"><i class="fas fa-map-marker-alt"></i> Mumbai, India</div>
+            <div class="pd-detail"><i class="fas fa-clock"></i> 7 min pitch + 8 min Q&A</div>
+            <div class="pd-detail"><i class="fas fa-users"></i> 18 Investors Panel</div>
+          </div>
+          <div class="pd-spots">
+            <span class="pd-spots-label">Spots Remaining</span>
+            <div class="pd-spots-bar"><div class="pd-spots-fill" style="width:80%"></div></div>
+            <span class="pd-spots-num">4 left</span>
+          </div>
+          <button class="btn-apply" onclick="applyPitchDay(this, 'India Fintech Summit')"><i class="fas fa-rocket"></i> Apply Now</button>
+        </div>
+      </div>
+
+      <div class="pitchday-card reveal">
+        <div class="pd-header">
+          <span class="pd-badge upcoming"><i class="fas fa-clock"></i> Upcoming</span>
+          <div class="pd-date"><i class="fas fa-calendar"></i> May 18, 2026</div>
+        </div>
+        <div class="pd-body">
+          <div class="pd-title">CleanTech & Impact Pitch Night</div>
+          <div class="pd-org"><i class="fas fa-building"></i> NexusLaunch × Acumen Fund</div>
+          <div class="pd-details">
+            <div class="pd-detail"><i class="fas fa-video"></i> Hybrid (London + Virtual)</div>
+            <div class="pd-detail"><i class="fas fa-clock"></i> 8 min pitch + 7 min Q&A</div>
+            <div class="pd-detail"><i class="fas fa-users"></i> 10 Investors Panel</div>
+          </div>
+          <div class="pd-spots">
+            <span class="pd-spots-label">Applications Open</span>
+            <div class="pd-spots-bar"><div class="pd-spots-fill" style="width:25%"></div></div>
+            <span class="pd-spots-num">15 left</span>
+          </div>
+          <button class="btn-apply" onclick="applyPitchDay(this, 'CleanTech Pitch Night')"><i class="fas fa-bell"></i> Get Notified</button>
+        </div>
+      </div>
+
+      <div class="pitchday-card reveal">
+        <div class="pd-header">
+          <span class="pd-badge closing"><i class="fas fa-fire" style="font-size:10px;"></i> Closing Soon</span>
+          <div class="pd-date"><i class="fas fa-calendar"></i> April 14, 2026</div>
+        </div>
+        <div class="pd-body">
+          <div class="pd-title">Pre-Seed Founder Showcase</div>
+          <div class="pd-org"><i class="fas fa-building"></i> NexusLaunch Internal</div>
+          <div class="pd-details">
+            <div class="pd-detail"><i class="fas fa-video"></i> Virtual</div>
+            <div class="pd-detail"><i class="fas fa-clock"></i> 4 min pitch + 6 min Q&A</div>
+            <div class="pd-detail"><i class="fas fa-users"></i> 8 Angel Investors</div>
+          </div>
+          <div class="pd-spots">
+            <span class="pd-spots-label">Spots Remaining</span>
+            <div class="pd-spots-bar"><div class="pd-spots-fill" style="width:95%"></div></div>
+            <span class="pd-spots-num">1 left</span>
+          </div>
+          <button class="btn-apply" onclick="applyPitchDay(this, 'Pre-Seed Showcase')"><i class="fas fa-rocket"></i> Apply Now</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- How it works -->
+<section class="how-section">
+  <div class="container">
+    <div class="section-header reveal" style="text-align:center;">
+      <h2>How Investor Connect Works</h2>
+      <p style="max-width:520px;margin:0 auto;">From profile to funded in four simple steps</p>
+    </div>
+    <div class="steps-grid">
+      <div class="step-card reveal delay-1">
+        <div class="step-num">1</div>
+        <h3>Build Your Profile</h3>
+        <p>Fill in your startup details, traction, and funding requirements. Takes under 5 minutes.</p>
+      </div>
+      <div class="step-card reveal delay-2">
+        <div class="step-num">2</div>
+        <h3>AI Matchmaking</h3>
+        <p>Our algorithm surfaces the most relevant investors based on stage, sector, and thesis alignment.</p>
+      </div>
+      <div class="step-card reveal delay-3">
+        <div class="step-num">3</div>
+        <h3>Request Introduction</h3>
+        <p>Send a personalised intro request with your one-pager. Investors respond within 72 hours.</p>
+      </div>
+      <div class="step-card reveal delay-4">
+        <div class="step-num">4</div>
+        <h3>Meet & Close</h3>
+        <p>Schedule the call, share your deck, and close your round. We support you throughout.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Testimonials -->
+<section class="testimonials-section">
+  <div class="container">
+    <div class="section-header reveal" style="text-align:center;">
+      <h2>Founders Who Raised Through NexusLaunch</h2>
+      <p style="max-width:520px;margin:0 auto;">Real outcomes from real founders in our community</p>
+    </div>
+    <div class="testimonials-grid">
+      <div class="testimonial-card reveal delay-1">
+        <div class="tc-stars">★★★★★</div>
+        <div class="tc-quote">"Within 2 weeks of joining NexusLaunch Investor Connect, I had 6 intro calls. Closed our pre-seed in 6 weeks — something I couldn't do alone in 6 months."</div>
+        <div class="tc-author">
+          <div class="tc-avatar av-purple">SC</div>
+          <div>
+            <div class="tc-name">Sarah Chen</div>
+            <div class="tc-role">Founder, EduMind</div>
+            <div class="tc-raised"><i class="fas fa-check-circle"></i> Raised $500K Pre-Seed</div>
+          </div>
+        </div>
+      </div>
+      <div class="testimonial-card reveal delay-2">
+        <div class="tc-stars">★★★★★</div>
+        <div class="tc-quote">"The investor matching was scarily accurate. Every investor I connected with had already invested in similar companies. Quality over quantity — exactly what early-stage founders need."</div>
+        <div class="tc-author">
+          <div class="tc-avatar av-teal">AP</div>
+          <div>
+            <div class="tc-name">Arjun Patel</div>
+            <div class="tc-role">Co-founder, FlowMed</div>
+            <div class="tc-raised"><i class="fas fa-check-circle"></i> Raised $1.2M Seed</div>
+          </div>
+        </div>
+      </div>
+      <div class="testimonial-card reveal delay-3">
+        <div class="tc-stars">★★★★★</div>
+        <div class="tc-quote">"I attended the SaaS Demo Day and walked away with two term sheets. The investor panel was genuinely high quality and the format was tight and professional."</div>
+        <div class="tc-author">
+          <div class="tc-avatar av-coral">NB</div>
+          <div>
+            <div class="tc-name">Nina Bauer</div>
+            <div class="tc-role">CEO, StackFlow</div>
+            <div class="tc-raised"><i class="fas fa-check-circle"></i> Raised $800K Seed</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+  <div class="container" style="position:relative;z-index:1;">
+    <h2 class="reveal"><i class="fas fa-building"></i> Ready to Meet Your Investors?</h2>
+    <p class="reveal">Join 5,000+ founders who've accessed NexusLaunch's curated investor network</p>
+    <div style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap;" class="reveal">
+      <button class="btn-primary" onclick="openConnectModal()"><i class="fas fa-paper-plane"></i> Apply for Intro Now</button>
+      <button class="btn-outline-white" onclick="scrollTo('investors')"><i class="fas fa-search"></i> Browse Investors</button>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <div class="footer-content">
+      <div class="footer-logo">⚡ NexusLaunch</div>
+      <div class="footer-links">
+        <a href="index.html#overview">Overview</a>
+        <a href="index.html#stats">Impact</a>
+        <a href="index.html#solution">Solution</a>
+        <a href="index.html#tools">Tools</a>
+        <a href="index.html#about">About</a>
+      </div>
+    </div>
+    <div class="copyright">© 2025 NexusLaunch — AI-Powered Startup Ecosystem. All rights reserved.</div>
+  </div>
+</footer>
+
+<!-- Connect Modal -->
+<div id="connectModal" class="modal">
+  <div class="modal-content">
+    <button class="modal-close" onclick="closeModal()">&times;</button>
+    <h2><i class="fas fa-handshake" style="color:#4f46e5;"></i> Request Introduction</h2>
+    <p class="subtitle">Tell us about your startup and we'll make the perfect intro</p>
+    <div class="form-group">
+      <label>Full Name</label>
+      <input type="text" id="founderName" placeholder="e.g. Jane Doe">
+    </div>
+    <div class="form-row">
+      <div class="form-group">
+        <label>Email</label>
+        <input type="email" id="founderEmail" placeholder="your@email.com">
+      </div>
+      <div class="form-group">
+        <label>Startup Name</label>
+        <input type="text" id="startupName" placeholder="e.g. FlowMed">
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group">
+        <label>Stage</label>
+        <select id="founderStage">
+          <option>Pre-Seed</option>
+          <option>Seed</option>
+          <option>Series A</option>
+          <option>Series B+</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Raise Amount</label>
+        <input type="text" id="raiseAmount" placeholder="e.g. $500K">
+      </div>
+    </div>
+    <div class="form-group">
+      <label>What does your startup do? (1-2 sentences)</label>
+      <textarea id="startupDesc" placeholder="We build AI-powered tools for..."></textarea>
+    </div>
+    <button class="btn-submit" onclick="submitConnect()"><i class="fas fa-paper-plane"></i> Submit Introduction Request</button>
+  </div>
+</div>
+
+<!-- Toast -->
+<div id="toast" class="toast"><i class="fas fa-check-circle"></i> <span id="toastMsg"></span></div>
+
+<script>
+// Scroll reveal
+const revealEls = document.querySelectorAll('.reveal');
+const revealObs = new IntersectionObserver((entries) => {
+  entries.forEach((e, i) => {
+    if (e.isIntersecting) {
+      setTimeout(() => e.target.classList.add('visible'), (i % 4) * 80);
+      revealObs.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.12 });
+revealEls.forEach(el => revealObs.observe(el));
+
+// Filter logic
+let activeTag = '';
+function filterInvestors() {
+  const q = document.getElementById('searchInput').value.toLowerCase();
+  const stage = document.getElementById('stageFilter').value;
+  const sector = document.getElementById('sectorFilter').value;
+  const cards = document.querySelectorAll('#investorsGrid .investor-card');
+  let count = 0;
+  cards.forEach(card => {
+    const name = card.querySelector('.investor-name').textContent.toLowerCase();
+    const title = card.querySelector('.investor-title').textContent.toLowerCase();
+    const tags = Array.from(card.querySelectorAll('.focus-tag')).map(t => t.textContent.toLowerCase()).join(' ');
+    const cardStage = card.dataset.stage || '';
+    const cardSector = card.dataset.sector || '';
+    const cardType = card.dataset.type || '';
+    const cardRegion = card.dataset.region || '';
+    const matchQ = !q || name.includes(q) || title.includes(q) || tags.includes(q);
+    const matchStage = !stage || cardStage.includes(stage);
+    const matchSector = !sector || cardSector.includes(sector);
+    const matchTag = !activeTag || cardType === activeTag || cardRegion.includes(activeTag);
+    const show = matchQ && matchStage && matchSector && matchTag;
+    card.style.display = show ? '' : 'none';
+    if (show) count++;
+  });
+  document.getElementById('resultsCount').textContent = `Showing ${count} investor${count !== 1 ? 's' : ''}`;
+}
+
+function setTag(el, tag) {
+  document.querySelectorAll('.filter-tag').forEach(t => t.classList.remove('active'));
+  el.classList.add('active');
+  activeTag = tag;
+  filterInvestors();
+}
+
+// Modal
+function openConnectModal(investorName) {
+  const modal = document.getElementById('connectModal');
+  if (investorName) {
+    modal.querySelector('h2').innerHTML = `<i class="fas fa-handshake" style="color:#4f46e5;"></i> Intro to ${investorName}`;
+  } else {
+    modal.querySelector('h2').innerHTML = `<i class="fas fa-handshake" style="color:#4f46e5;"></i> Request Introduction`;
+  }
+  modal.classList.add('active');
+}
+function closeModal() {
+  document.getElementById('connectModal').classList.remove('active');
+}
+window.addEventListener('click', e => { if (e.target === document.getElementById('connectModal')) closeModal(); });
+
+function submitConnect() {
+  const name = document.getElementById('founderName').value;
+  const email = document.getElementById('founderEmail').value;
+  if (!name || !email) { showToast('Please fill in your name and email ✉️'); return; }
+  closeModal();
+  showToast('🎉 Intro request submitted! Expect a response within 72 hours.');
+  document.querySelectorAll('#connectModal input, #connectModal textarea').forEach(i => i.value = '');
+}
+
+function toggleSave(btn) {
+  btn.classList.toggle('saved');
+  showToast(btn.classList.contains('saved') ? '❤️ Investor saved to your list' : 'Removed from saved list');
+}
+
+function applyPitchDay(btn, name) {
+  showToast(`🚀 Application sent for ${name}!`);
+  btn.textContent = '✓ Applied';
+  btn.classList.add('disabled');
+  btn.disabled = true;
+}
+
+function showToast(msg) {
+  const toast = document.getElementById('toast');
+  document.getElementById('toastMsg').textContent = msg;
+  toast.classList.add('show');
+  setTimeout(() => toast.classList.remove('show'), 3500);
+}
+
+function scrollTo(id) {
+  document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
+}
+</script>
+</body>
+</html>
