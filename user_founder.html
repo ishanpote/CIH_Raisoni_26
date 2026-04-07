@@ -1,0 +1,74 @@
+<!-- dashboard-founder.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Founder Dashboard | NexusLaunch</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+:root{--p1:#4f46e5;--p2:#7c3aed;--bg:linear-gradient(135deg,#f5f3ff 0%,#eef2ff 100%);--white:#fff;--text-dark:#1e293b;--text-mid:#334155;--text-muted:#94a3b8;--border:#e2e8f0;--input-bg:#fafbff;--purple-shadow:0 8px 20px rgba(79,70,229,0.3);}
+body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text-dark);}
+.dash-nav{display:flex;justify-content:space-between;align-items:center;padding:16px 40px;background:white;box-shadow:0 2px 20px rgba(79,70,229,0.08);position:sticky;top:0;z-index:100;flex-wrap:wrap;}
+.logo{font-size:24px;font-weight:800;background:linear-gradient(135deg,var(--p1),var(--p2));background-clip:text;-webkit-background-clip:text;color:transparent;display:flex;align-items:center;gap:8px;text-decoration:none;}
+.dash-nav-right{display:flex;align-items:center;gap:16px;}
+.dash-user-pill{display:flex;align-items:center;gap:10px;background:rgba(79,70,229,0.08);border:1px solid rgba(79,70,229,0.15);padding:6px 16px 6px 8px;border-radius:40px;}
+.dash-avatar{width:32px;height:32px;border-radius:50%;background:linear-gradient(135deg,var(--p1),var(--p2));display:flex;align-items:center;justify-content:center;font-size:13px;color:white;font-weight:700;}
+.dash-user-name{font-size:13px;font-weight:600;color:var(--text-dark);}
+.logout-btn{padding:8px 18px;border-radius:40px;background:transparent;border:1px solid rgba(79,70,229,0.2);color:var(--p1);font-size:13px;font-weight:600;cursor:pointer;}
+.dash-body{padding:36px 40px;max-width:1200px;margin:0 auto;}
+.dash-greeting{margin-bottom:32px;}
+.dash-greeting h1{font-size:28px;font-weight:800;}
+.stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:32px;}
+@media(max-width:900px){.stats-grid{grid-template-columns:repeat(2,1fr);}}
+.stat-card{background:white;border-radius:24px;padding:20px 22px;box-shadow:0 4px 16px rgba(79,70,229,0.07);border:1px solid var(--border);}
+.stat-card-label{font-size:12px;color:var(--text-muted);font-weight:600;text-transform:uppercase;margin-bottom:8px;}
+.stat-card-value{font-size:28px;font-weight:800;background:linear-gradient(135deg,var(--p1),var(--p2));background-clip:text;-webkit-background-clip:text;color:transparent;}
+.pitch-form-card{background:white;border-radius:28px;padding:28px;box-shadow:0 4px 16px rgba(79,70,229,0.07);border:1px solid var(--border);margin-bottom:28px;}
+.pitch-form-card h2{font-size:18px;font-weight:700;margin-bottom:20px;display:flex;align-items:center;gap:10px;}
+.pitch-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+@media(max-width:640px){.pitch-grid{grid-template-columns:1fr;}}
+.pitch-input{width:100%;padding:12px 16px;border:1.5px solid var(--border);border-radius:16px;font-family:'Inter',sans-serif;font-size:14px;background:var(--input-bg);}
+.submit-btn{padding:15px;background:linear-gradient(135deg,var(--p1),var(--p2));border:none;border-radius:48px;font-size:15px;font-weight:700;color:white;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:10px;box-shadow:0 8px 20px rgba(79,70,229,0.3);width:100%;max-width:260px;margin-top:16px;}
+.dash-section-hdr{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;}
+.dash-section-hdr h2{font-size:20px;font-weight:700;}
+.view-all-btn{padding:8px 20px;border-radius:40px;background:rgba(79,70,229,0.08);border:1px solid rgba(79,70,229,0.2);color:var(--p1);font-size:13px;font-weight:600;cursor:pointer;}
+.pitch-table{width:100%;border-collapse:collapse;}
+.pitch-table th{font-size:12px;font-weight:600;text-transform:uppercase;color:var(--text-muted);padding:10px 14px;text-align:left;border-bottom:1px solid var(--border);}
+.pitch-table td{padding:14px;font-size:14px;color:var(--text-mid);border-bottom:1px solid rgba(226,232,240,0.6);}
+.score-badge{padding:4px 12px;border-radius:40px;font-size:12px;font-weight:700;}
+.score-high{background:rgba(16,185,129,0.1);color:#065f46;}
+.score-medium{background:rgba(79,70,229,0.1);color:var(--p1);}
+.ideas-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-bottom:36px;}
+@media(max-width:900px){.ideas-grid{grid-template-columns:repeat(2,1fr);}}
+.idea-card{background:white;border-radius:24px;padding:22px;border:1.5px solid var(--border);}
+.idea-card-top{display:flex;justify-content:space-between;align-items:flex-start;}
+.idea-startup-icon{width:44px;height:44px;border-radius:14px;background:linear-gradient(135deg,var(--p1),var(--p2));display:flex;align-items:center;justify-content:center;font-size:18px;color:white;}
+.idea-tags{display:flex;flex-wrap:wrap;gap:6px;margin:12px 0;}
+.idea-tag{padding:3px 10px;border-radius:40px;font-size:11px;font-weight:600;background:rgba(79,70,229,0.08);color:var(--p1);}
+.toast{position:fixed;bottom:20px;right:20px;background:linear-gradient(135deg,var(--p1),var(--p2));color:white;padding:12px 20px;border-radius:40px;z-index:9999;animation:fadeUp 0.3s;}
+@keyframes fadeUp{from{opacity:0;transform:translateY(30px);}to{opacity:1;transform:translateY(0);}}
+</style>
+</head>
+<body>
+<nav class="dash-nav"><a class="logo" href="index.html"><i class="fas fa-bolt"></i> NexusLaunch</a><div class="dash-nav-right"><div class="dash-user-pill"><div class="dash-avatar">AJ</div><span class="dash-user-name">Alex Johnson · Founder</span></div><button class="logout-btn" onclick="logout()"><i class="fas fa-sign-out-alt"></i> Logout</button></div></nav>
+<div class="dash-body">
+  <div class="dash-greeting"><h1>Welcome back, Alex 🚀</h1><p>Track your pitch performance and connect with investors.</p></div>
+  <div class="stats-grid"><div class="stat-card"><div class="stat-card-label">Pitch Views</div><div class="stat-card-value">312</div><div class="stat-card-sub">+28 today</div></div><div class="stat-card"><div class="stat-card-label">Investor Interest</div><div class="stat-card-value">14</div><div class="stat-card-sub">5 new this week</div></div><div class="stat-card"><div class="stat-card-label">AI Score</div><div class="stat-card-value">8.2</div><div class="stat-card-sub">Top 15% on platform</div></div><div class="stat-card"><div class="stat-card-label">Startup Stage</div><div class="stat-card-value">Seed</div><div class="stat-card-sub">GreenChain Logistics</div></div></div>
+  <div class="pitch-form-card"><h2><i class="fas fa-microchip"></i> Submit / Update Your Pitch</h2><div class="pitch-grid"><div><label style="font-size:13px;font-weight:600;">Startup Name</label><input class="pitch-input" type="text" value="GreenChain Logistics" /></div><div><label style="font-size:13px;font-weight:600;">Industry</label><select class="pitch-input"><option>CleanTech</option><option>AI / ML</option><option>FinTech</option></select></div><div><label style="font-size:13px;font-weight:600;">Target Audience</label><input class="pitch-input" type="text" placeholder="E-commerce businesses" /></div><div><label style="font-size:13px;font-weight:600;">Revenue Model</label><input class="pitch-input" type="text" placeholder="SaaS subscription" /></div><div style="grid-column:span 2;"><label style="font-size:13px;font-weight:600;">Pitch / Problem Statement</label><textarea class="pitch-input" rows="3" placeholder="Describe your startup..."></textarea></div></div><button class="submit-btn" onclick="toast('Pitch submitted for AI analysis!')"><i class="fas fa-paper-plane"></i> Submit Pitch</button></div>
+  <div class="dash-section-hdr"><h2><i class="fas fa-list" style="color:#4f46e5;"></i> My Pitches</h2><button class="view-all-btn">Manage All</button></div>
+  <div style="background:white;border-radius:24px;padding:8px 0;margin-bottom:36px;"><table class="pitch-table"><thead><tr><th>Startup</th><th>Industry</th><th>AI Score</th><th>Views</th><th>Interest</th><th>Status</th></tr></thead><tbody><tr><td><strong>GreenChain Logistics</strong></td><td>CleanTech</td><td><span class="score-badge score-high">8.2/10</span></td><td>312</td><td>14</td><td><span class="score-badge score-high">Active</span></td></tr><tr><td><strong>EduFlow AI</strong></td><td>EdTech</td><td><span class="score-badge score-medium">6.7/10</span></td><td>89</td><td>4</td><td><span class="score-badge score-medium">Review</span></td></tr></tbody></table></div>
+  <div class="dash-section-hdr"><h2><i class="fas fa-fire" style="color:#4f46e5;"></i> Trending Startup Ideas</h2></div>
+  <div class="ideas-grid" id="founder-ideas-grid"></div>
+</div>
+<script>
+const STARTUPS = [{ name:'HealthBridge', icon:'fas fa-heartbeat', pitch:'Connecting rural patients with urban specialists.', tags:['HealthTech','Telemedicine'], score:8.8, founder:'MK', founderName:'Mike K.' },{ name:'FinSpark', icon:'fas fa-coins', pitch:'Automated micro-investing for Gen Z.', tags:['FinTech','Investing'], score:6.9, founder:'PL', founderName:'Priya L.' },{ name:'BuildFast SaaS', icon:'fas fa-code', pitch:'No-code platform for SMBs.', tags:['SaaS','No-Code'], score:7.4, founder:'TD', founderName:'Tom D.' }];
+function ideaCard(s){ return `<div class="idea-card"><div class="idea-card-top"><div class="idea-startup-icon"><i class="${s.icon}"></i></div><span class="score-badge score-high">${s.score}/10</span></div><h3>${s.name}</h3><p>${s.pitch}</p><div class="idea-tags">${s.tags.map(t=>`<span class="idea-tag">${t}</span>`).join('')}</div><div class="founder-meta" style="display:flex;gap:8px;margin-top:12px;"><div class="founder-avatar-sm" style="width:28px;height:28px;border-radius:50%;background:linear-gradient(135deg,var(--p1),var(--p2));display:flex;align-items:center;justify-content:center;font-size:11px;">${s.founder}</div><span class="founder-name-sm">${s.founderName}</span></div></div>`; }
+document.getElementById('founder-ideas-grid').innerHTML = STARTUPS.map(ideaCard).join('');
+function toast(msg){ let t=document.createElement('div'); t.className='toast'; t.innerHTML=`<i class="fas fa-check-circle"></i> ${msg}`; document.body.appendChild(t); setTimeout(()=>t.remove(),3000); }
+function logout(){ localStorage.removeItem('nexusLaunchAuth'); window.location.href='landing_v2.html'; }
+</script>
+</body>
+</html>

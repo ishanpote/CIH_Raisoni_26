@@ -1,0 +1,116 @@
+<!-- register.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Register | NexusLaunch</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
+:root { --p1: #4f46e5; --p2: #7c3aed; --bg: linear-gradient(135deg, #f5f3ff 0%, #eef2ff 100%); --white: #ffffff; --text-dark: #1e293b; --text-mid: #334155; --text-muted: #94a3b8; --border: #e2e8f0; --input-bg: #fafbff; --card-shadow: 0 25px 50px -12px rgba(0,0,0,0.15); --purple-shadow: 0 8px 20px rgba(79,70,229,0.3); }
+body { font-family: 'Inter', sans-serif; background: var(--bg); min-height: 100vh; color: var(--text-dark); }
+.logo { font-size:24px; font-weight:800; background:linear-gradient(135deg,var(--p1),var(--p2)); background-clip:text; -webkit-background-clip:text; color:transparent; display:flex; align-items:center; gap:8px; text-decoration:none; cursor:pointer; }
+.auth-header { max-width:960px; width:100%; display:flex; justify-content:space-between; align-items:center; margin:40px auto 20px; flex-wrap:wrap; gap:16px; padding:0 20px; }
+.auth-switch { font-size:13px; color:var(--text-muted); }
+.auth-switch a { color:var(--p1); font-weight:600; text-decoration:none; cursor:pointer; }
+.role-selector { display:flex; gap:8px; justify-content:center; margin-bottom:32px; background:white; padding:6px; border-radius:48px; width:fit-content; margin-left:auto; margin-right:auto; box-shadow:0 8px 20px rgba(79,70,229,0.12); }
+.role-tab { padding:10px 24px; border-radius:48px; font-size:14px; font-weight:600; cursor:pointer; border:none; background:transparent; color:var(--text-muted); display:flex; align-items:center; gap:8px; transition:all 0.3s ease; font-family:'Inter',sans-serif; }
+.role-tab.active { background:linear-gradient(135deg,var(--p1),var(--p2)); color:white; box-shadow:0 8px 20px rgba(79,70,229,0.35); }
+.auth-card { background:white; border-radius:48px; box-shadow:var(--card-shadow); overflow:hidden; width:100%; max-width:550px; margin:0 auto; animation:fadeUp 0.6s ease forwards; }
+@keyframes fadeUp { from{opacity:0;transform:translateY(30px);} to{opacity:1;transform:translateY(0);} }
+.auth-card-header { padding:36px 40px 28px; color:white; text-align:center; position:relative; overflow:hidden; }
+.hdr-investor { background:linear-gradient(135deg,var(--p1),var(--p2)); }
+.hdr-founder  { background:linear-gradient(135deg,var(--p2),var(--p1)); }
+.hdr-user     { background:linear-gradient(160deg,var(--p2) 0%,var(--p1) 60%,var(--p2) 100%); }
+.role-badge { display:inline-flex; align-items:center; gap:6px; padding:4px 14px; border-radius:40px; font-size:11px; font-weight:700; letter-spacing:0.06em; text-transform:uppercase; background:rgba(255,255,255,0.2); color:white; margin-bottom:14px; }
+.role-icon { width:68px; height:68px; border-radius:50%; background:rgba(255,255,255,0.18); border:2px solid rgba(255,255,255,0.3); display:flex; align-items:center; justify-content:center; font-size:28px; margin:0 auto 16px; }
+.auth-card-header h2 { font-size:22px; font-weight:700; margin-bottom:6px; }
+.auth-card-body { padding:32px 40px 40px; }
+.form-row { display:grid; grid-template-columns:1fr 1fr; gap:16px; }
+@media(max-width:480px){ .form-row{grid-template-columns:1fr;} }
+.input-group { margin-bottom:18px; }
+.input-group label { display:flex; align-items:center; gap:8px; font-weight:600; font-size:13px; color:var(--text-dark); margin-bottom:7px; }
+.input-wrap { position:relative; }
+.input-wrap input, .input-wrap select { width:100%; padding:13px 18px 13px 42px; border:1.5px solid var(--border); border-radius:18px; font-family:'Inter',sans-serif; font-size:14px; color:var(--text-dark); background:var(--input-bg); transition:all 0.3s ease; appearance:none; }
+.input-wrap .icon-left { position:absolute; left:14px; top:50%; transform:translateY(-50%); font-size:13px; color:var(--text-muted); }
+.input-wrap input:focus, .input-wrap select:focus { outline:none; border-color:var(--p2); box-shadow:0 0 0 3px rgba(124,58,237,0.12); background:white; }
+.eye-toggle { position:absolute; right:14px; top:50%; transform:translateY(-50%); background:none; border:none; cursor:pointer; font-size:13px; color:var(--text-muted); }
+.submit-btn { width:100%; padding:15px; background:linear-gradient(135deg,var(--p1),var(--p2)); border:none; border-radius:48px; font-size:15px; font-weight:700; color:white; cursor:pointer; transition:all 0.3s ease; display:flex; align-items:center; justify-content:center; gap:10px; box-shadow:0 8px 20px rgba(79,70,229,0.3); font-family:'Inter',sans-serif; }
+.terms-note { font-size:11px; color:var(--text-muted); text-align:center; margin-top:12px; line-height:1.5; }
+.terms-note a { color:var(--p1); text-decoration:none; }
+.auth-footer-link { text-align:center; margin-top:18px; font-size:13px; color:var(--text-muted); }
+.auth-footer-link a { color:var(--p1); font-weight:600; text-decoration:none; cursor:pointer; }
+.toast { position:fixed; bottom:20px; right:20px; background:linear-gradient(135deg,var(--p1),var(--p2)); color:white; padding:12px 20px; border-radius:40px; font-size:13px; font-weight:500; display:flex; align-items:center; gap:8px; box-shadow:0 4px 20px rgba(79,70,229,0.35); z-index:9999; animation:fadeUp 0.3s ease; }
+</style>
+</head>
+<body>
+<div style="display:flex; flex-direction:column; align-items:center; padding:40px 20px;">
+  <div class="auth-header"><a class="logo" href="index.html"><i class="fas fa-bolt"></i> NexusLaunch</a><div class="auth-switch">Already a member? <a href="login.html">Sign in</a></div></div>
+  <div class="role-selector">
+    <button class="role-tab active" id="rtab-investor" onclick="switchRole('investor')"><i class="fas fa-chart-line"></i> Investor</button>
+    <button class="role-tab" id="rtab-founder" onclick="switchRole('founder')"><i class="fas fa-lightbulb"></i> Founder</button>
+    <button class="role-tab" id="rtab-user" onclick="switchRole('user')"><i class="fas fa-user"></i> User</button>
+  </div>
+  <!-- Investor Register -->
+  <div id="rpanel-investor" class="auth-card">
+    <div class="auth-card-header hdr-investor"><div class="role-badge"><i class="fas fa-briefcase"></i> Investor Registration</div><div class="role-icon"><i class="fas fa-chart-line"></i></div><h2>Join as an Investor</h2><p>Discover AI-vetted startups &amp; build your portfolio</p></div>
+    <div class="auth-card-body">
+      <div class="form-row"><div class="input-group"><label><i class="fas fa-user"></i> First Name</label><div class="input-wrap"><i class="fas fa-user icon-left"></i><input type="text" id="inv-fname" placeholder="John" /></div></div><div class="input-group"><label><i class="fas fa-user"></i> Last Name</label><div class="input-wrap"><i class="fas fa-user icon-left"></i><input type="text" id="inv-lname" placeholder="Smith" /></div></div></div>
+      <div class="input-group"><label><i class="fas fa-building"></i> Company / Firm Name</label><div class="input-wrap"><i class="fas fa-building icon-left"></i><input type="text" id="inv-company" placeholder="e.g., Sequoia Capital" /></div></div>
+      <div class="input-group"><label><i class="fas fa-envelope"></i> Work Email</label><div class="input-wrap"><i class="fas fa-envelope icon-left"></i><input type="email" id="inv-email" placeholder="you@venturefirm.com" /></div></div>
+      <div class="input-group"><label><i class="fas fa-dollar-sign"></i> Investment Range</label><div class="input-wrap"><i class="fas fa-dollar-sign icon-left"></i><select id="inv-range"><option>Select investment range</option><option>$10K – $100K (Angel)</option><option>$100K – $500K (Pre-Seed)</option><option>$500K – $2M (Seed)</option><option>$2M – $10M (Series A)</option><option>$10M+ (Series B+)</option></select></div></div>
+      <div class="form-row"><div class="input-group"><label><i class="fas fa-lock"></i> Password</label><div class="input-wrap"><i class="fas fa-lock icon-left"></i><input type="password" id="inv-pwd" placeholder="Min 8 characters" /><button class="eye-toggle" onclick="togglePwd('inv-pwd',this)"><i class="fas fa-eye"></i></button></div></div><div class="input-group"><label><i class="fas fa-lock"></i> Confirm Password</label><div class="input-wrap"><i class="fas fa-lock icon-left"></i><input type="password" id="inv-pwd2" placeholder="Repeat password" /></div></div></div>
+      <button class="submit-btn" onclick="doRegister('investor')"><i class="fas fa-chart-line"></i> Create Investor Account</button>
+      <div class="terms-note">By registering you agree to our <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a>.</div>
+      <div class="auth-footer-link">Already have an account? <a href="login.html?role=investor">Sign in</a></div>
+    </div>
+  </div>
+  <!-- Founder Register -->
+  <div id="rpanel-founder" class="auth-card" style="display:none;">
+    <div class="auth-card-header hdr-founder"><div class="role-badge"><i class="fas fa-seedling"></i> Founder Registration</div><div class="role-icon"><i class="fas fa-lightbulb"></i></div><h2>Register Your Startup</h2><p>Get AI analysis &amp; connect with the right investors</p></div>
+    <div class="auth-card-body">
+      <div class="form-row"><div class="input-group"><label><i class="fas fa-user"></i> First Name</label><div class="input-wrap"><i class="fas fa-user icon-left"></i><input type="text" id="fnd-fname" placeholder="Alex" /></div></div><div class="input-group"><label><i class="fas fa-user"></i> Last Name</label><div class="input-wrap"><i class="fas fa-user icon-left"></i><input type="text" id="fnd-lname" placeholder="Johnson" /></div></div></div>
+      <div class="input-group"><label><i class="fas fa-building"></i> Company / Startup Name</label><div class="input-wrap"><i class="fas fa-building icon-left"></i><input type="text" id="fnd-company" placeholder="e.g., GreenChain Logistics" /></div></div>
+      <div class="input-group"><label><i class="fas fa-envelope"></i> Work Email</label><div class="input-wrap"><i class="fas fa-envelope icon-left"></i><input type="email" id="fnd-email" placeholder="you@yourstartup.com" /></div></div>
+      <div class="form-row"><div class="input-group"><label><i class="fas fa-industry"></i> Industry</label><div class="input-wrap"><i class="fas fa-industry icon-left"></i><select id="fnd-industry"><option>Select industry</option><option>AI / Machine Learning</option><option>FinTech</option><option>HealthTech</option><option>EdTech</option><option>CleanTech</option><option>SaaS / B2B</option><option>E-commerce</option><option>Other</option></select></div></div><div class="input-group"><label><i class="fas fa-seedling"></i> Stage</label><div class="input-wrap"><i class="fas fa-seedling icon-left"></i><select id="fnd-stage"><option>Select stage</option><option>Idea / Concept</option><option>MVP / Prototype</option><option>Early Revenue</option><option>Growth Stage</option></select></div></div></div>
+      <div class="form-row"><div class="input-group"><label><i class="fas fa-lock"></i> Password</label><div class="input-wrap"><i class="fas fa-lock icon-left"></i><input type="password" id="fnd-pwd" placeholder="Min 8 characters" /><button class="eye-toggle" onclick="togglePwd('fnd-pwd',this)"><i class="fas fa-eye"></i></button></div></div><div class="input-group"><label><i class="fas fa-lock"></i> Confirm Password</label><div class="input-wrap"><i class="fas fa-lock icon-left"></i><input type="password" id="fnd-pwd2" placeholder="Repeat password" /></div></div></div>
+      <button class="submit-btn" onclick="doRegister('founder')"><i class="fas fa-rocket"></i> Create Founder Account</button>
+      <div class="terms-note">By registering you agree to our <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a>.</div>
+      <div class="auth-footer-link">Already have an account? <a href="login.html?role=founder">Sign in</a></div>
+    </div>
+  </div>
+  <!-- User Register -->
+  <div id="rpanel-user" class="auth-card" style="display:none;">
+    <div class="auth-card-header hdr-user"><div class="role-badge"><i class="fas fa-star"></i> Join the Community</div><div class="role-icon"><i class="fas fa-user-astronaut"></i></div><h2>Create Your Account</h2><p>Explore startups, track trends &amp; discover innovations</p></div>
+    <div class="auth-card-body">
+      <div class="form-row"><div class="input-group"><label><i class="fas fa-user"></i> First Name</label><div class="input-wrap"><i class="fas fa-user icon-left"></i><input type="text" id="usr-fname" placeholder="Sam" /></div></div><div class="input-group"><label><i class="fas fa-user"></i> Last Name</label><div class="input-wrap"><i class="fas fa-user icon-left"></i><input type="text" id="usr-lname" placeholder="Taylor" /></div></div></div>
+      <div class="input-group"><label><i class="fas fa-at"></i> Username</label><div class="input-wrap"><i class="fas fa-at icon-left"></i><input type="text" id="usr-username" placeholder="@yourusername" /></div></div>
+      <div class="input-group"><label><i class="fas fa-envelope"></i> Email Address</label><div class="input-wrap"><i class="fas fa-envelope icon-left"></i><input type="email" id="usr-email" placeholder="you@email.com" /></div></div>
+      <div class="form-row"><div class="input-group"><label><i class="fas fa-lock"></i> Password</label><div class="input-wrap"><i class="fas fa-lock icon-left"></i><input type="password" id="usr-pwd" placeholder="Min 8 characters" /><button class="eye-toggle" onclick="togglePwd('usr-pwd',this)"><i class="fas fa-eye"></i></button></div></div><div class="input-group"><label><i class="fas fa-lock"></i> Confirm Password</label><div class="input-wrap"><i class="fas fa-lock icon-left"></i><input type="password" id="usr-pwd2" placeholder="Repeat password" /></div></div></div>
+      <button class="submit-btn" onclick="doRegister('user')"><i class="fas fa-user-plus"></i> Create Account</button>
+      <div class="divider" style="margin:18px 0;">or sign up with</div><div class="oauth-btns"><button class="oauth-btn"><i class="fab fa-google"></i> Google</button><button class="oauth-btn"><i class="fab fa-twitter"></i> Twitter / X</button></div>
+      <div class="terms-note">By registering you agree to our <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a>.</div>
+      <div class="auth-footer-link">Already have an account? <a href="login.html?role=user">Sign in</a></div>
+    </div>
+  </div>
+</div>
+<script>
+function switchRole(role) {
+  document.querySelectorAll('.role-tab').forEach(t=>t.classList.remove('active'));
+  document.getElementById('rtab-'+role).classList.add('active');
+  document.getElementById('rpanel-investor').style.display='none';
+  document.getElementById('rpanel-founder').style.display='none';
+  document.getElementById('rpanel-user').style.display='none';
+  document.getElementById('rpanel-'+role).style.display='block';
+}
+function togglePwd(id,btn){ let inp=document.getElementById(id); let icon=btn.querySelector('i'); if(inp.type==='password'){ inp.type='text'; icon.classList.replace('fa-eye','fa-eye-slash'); }else{ inp.type='password'; icon.classList.replace('fa-eye-slash','fa-eye'); } }
+function toast(msg){ let t=document.createElement('div'); t.className='toast'; t.innerHTML=`<i class="fas fa-check-circle"></i> ${msg}`; document.body.appendChild(t); setTimeout(()=>t.remove(),3000); }
+function doRegister(role){ toast(`Account created! Welcome to NexusLaunch 🎉`); localStorage.setItem('nexusLaunchAuth',JSON.stringify({role:role,loggedIn:true,at:Date.now()})); setTimeout(()=>{ window.location.href=`dashboard-${role}.html`; },900); }
+const urlParams = new URLSearchParams(window.location.search);
+const presetRole = urlParams.get('role');
+if(presetRole && ['investor','founder','user'].includes(presetRole)) switchRole(presetRole);
+</script>
+</body>
+</html>

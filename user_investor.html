@@ -1,0 +1,85 @@
+<!-- dashboard-investor.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Investor Dashboard | NexusLaunch</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+:root{--p1:#4f46e5;--p2:#7c3aed;--bg:linear-gradient(135deg,#f5f3ff 0%,#eef2ff 100%);--white:#fff;--text-dark:#1e293b;--text-mid:#334155;--text-muted:#94a3b8;--border:#e2e8f0;--input-bg:#fafbff;--purple-shadow:0 8px 20px rgba(79,70,229,0.3);}
+body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text-dark);}
+.dash-nav{display:flex;justify-content:space-between;align-items:center;padding:16px 40px;background:white;box-shadow:0 2px 20px rgba(79,70,229,0.08);position:sticky;top:0;z-index:100;flex-wrap:wrap;gap:12px;}
+.logo{font-size:24px;font-weight:800;background:linear-gradient(135deg,var(--p1),var(--p2));background-clip:text;-webkit-background-clip:text;color:transparent;display:flex;align-items:center;gap:8px;text-decoration:none;cursor:pointer;}
+.dash-nav-right{display:flex;align-items:center;gap:16px;}
+.dash-user-pill{display:flex;align-items:center;gap:10px;background:rgba(79,70,229,0.08);border:1px solid rgba(79,70,229,0.15);padding:6px 16px 6px 8px;border-radius:40px;}
+.dash-avatar{width:32px;height:32px;border-radius:50%;background:linear-gradient(135deg,var(--p1),var(--p2));display:flex;align-items:center;justify-content:center;font-size:13px;color:white;font-weight:700;}
+.dash-user-name{font-size:13px;font-weight:600;color:var(--text-dark);}
+.logout-btn{padding:8px 18px;border-radius:40px;background:transparent;border:1px solid rgba(79,70,229,0.2);color:var(--p1);font-size:13px;font-weight:600;cursor:pointer;font-family:'Inter',sans-serif;}
+.dash-body{padding:36px 40px;max-width:1200px;margin:0 auto;}
+.dash-greeting{margin-bottom:32px;}
+.dash-greeting h1{font-size:28px;font-weight:800;color:var(--text-dark);margin-bottom:6px;}
+.stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:32px;}
+@media(max-width:900px){.stats-grid{grid-template-columns:repeat(2,1fr);}}
+.stat-card{background:white;border-radius:24px;padding:20px 22px;box-shadow:0 4px 16px rgba(79,70,229,0.07);border:1px solid var(--border);}
+.stat-card-label{font-size:12px;color:var(--text-muted);font-weight:600;text-transform:uppercase;letter-spacing:0.05em;margin-bottom:8px;}
+.stat-card-value{font-size:28px;font-weight:800;background:linear-gradient(135deg,var(--p1),var(--p2));background-clip:text;-webkit-background-clip:text;color:transparent;}
+.dash-section-hdr{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;flex-wrap:wrap;gap:12px;}
+.dash-section-hdr h2{font-size:20px;font-weight:700;color:var(--text-dark);}
+.view-all-btn{padding:8px 20px;border-radius:40px;background:rgba(79,70,229,0.08);border:1px solid rgba(79,70,229,0.2);color:var(--p1);font-size:13px;font-weight:600;cursor:pointer;}
+.ideas-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-bottom:36px;}
+@media(max-width:900px){.ideas-grid{grid-template-columns:repeat(2,1fr);}}
+@media(max-width:580px){.ideas-grid{grid-template-columns:1fr;}}
+.idea-card{background:white;border-radius:24px;padding:22px;box-shadow:0 4px 16px rgba(79,70,229,0.06);border:1.5px solid var(--border);transition:all 0.3s ease;}
+.idea-card:hover{transform:translateY(-4px);box-shadow:0 16px 32px rgba(79,70,229,0.14);border-color:rgba(79,70,229,0.25);}
+.idea-card-top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:12px;}
+.idea-startup-icon{width:44px;height:44px;border-radius:14px;background:linear-gradient(135deg,var(--p1),var(--p2));display:flex;align-items:center;justify-content:center;font-size:18px;color:white;}
+.score-badge{padding:4px 12px;border-radius:40px;font-size:12px;font-weight:700;}
+.score-high{background:rgba(16,185,129,0.1);color:#065f46;}
+.score-medium{background:rgba(79,70,229,0.1);color:var(--p1);}
+.score-low{background:rgba(239,68,68,0.1);color:#991b1b;}
+.idea-card h3{font-size:16px;font-weight:700;margin-bottom:6px;}
+.idea-card p{font-size:13px;color:var(--text-mid);line-height:1.6;margin-bottom:14px;}
+.idea-tags{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:14px;}
+.idea-tag{padding:3px 10px;border-radius:40px;font-size:11px;font-weight:600;background:rgba(79,70,229,0.08);color:var(--p1);}
+.idea-card-footer{display:flex;justify-content:space-between;align-items:center;padding-top:12px;border-top:1px solid var(--border);}
+.founder-meta{display:flex;align-items:center;gap:8px;}
+.founder-avatar-sm{width:28px;height:28px;border-radius:50%;background:linear-gradient(135deg,var(--p1),var(--p2));display:flex;align-items:center;justify-content:center;font-size:11px;color:white;font-weight:700;}
+.founder-name-sm{font-size:12px;font-weight:600;color:var(--text-mid);}
+.action-btn{width:32px;height:32px;border-radius:50%;border:1px solid var(--border);background:var(--input-bg);display:flex;align-items:center;justify-content:center;font-size:13px;color:var(--text-muted);cursor:pointer;}
+.action-btn:hover{background:rgba(79,70,229,0.08);color:var(--p1);}
+.filter-bar{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:24px;}
+.filter-chip{padding:8px 18px;border-radius:40px;font-size:13px;font-weight:600;cursor:pointer;border:1.5px solid var(--border);background:white;color:var(--text-mid);}
+.filter-chip.active,.filter-chip:hover{background:linear-gradient(135deg,var(--p1),var(--p2));color:white;border-color:transparent;}
+.toast{position:fixed;bottom:20px;right:20px;background:linear-gradient(135deg,var(--p1),var(--p2));color:white;padding:12px 20px;border-radius:40px;font-size:13px;font-weight:500;z-index:9999;animation:fadeUp 0.3s ease;}
+@keyframes fadeUp{from{opacity:0;transform:translateY(30px);}to{opacity:1;transform:translateY(0);}}
+</style>
+</head>
+<body>
+<nav class="dash-nav">
+  <a class="logo" href="index.html"><i class="fas fa-bolt"></i> NexusLaunch</a>
+  <div class="dash-nav-right"><div class="dash-user-pill"><div class="dash-avatar">JS</div><span class="dash-user-name">John Smith · Investor</span></div><button class="logout-btn" onclick="logout()"><i class="fas fa-sign-out-alt"></i> Logout</button></div>
+</nav>
+<div class="dash-body">
+  <div class="dash-greeting"><h1>Good morning, John 👋</h1><p>Here's what's happening in your investment portfolio today.</p></div>
+  <div class="stats-grid"><div class="stat-card"><div class="stat-card-label">Startups Viewed</div><div class="stat-card-value">47</div><div class="stat-card-sub">+12 this week</div></div><div class="stat-card"><div class="stat-card-label">Deals in Pipeline</div><div class="stat-card-value">8</div><div class="stat-card-sub">3 awaiting reply</div></div><div class="stat-card"><div class="stat-card-label">Portfolio Value</div><div class="stat-card-value">$2.4M</div><div class="stat-card-sub">↑ 14% this quarter</div></div><div class="stat-card"><div class="stat-card-label">Avg. Pitch Score</div><div class="stat-card-value">7.8</div><div class="stat-card-sub">Across saved ideas</div></div></div>
+  <div class="dash-section-hdr"><h2><i class="fas fa-fire" style="color:#4f46e5;margin-right:8px;"></i> Top Startup Ideas This Week</h2><button class="view-all-btn">View All</button></div>
+  <div class="ideas-grid" id="investor-ideas-grid"></div>
+  <div class="dash-section-hdr"><h2><i class="fas fa-search" style="color:#4f46e5;margin-right:8px;"></i> Browse by Industry</h2></div>
+  <div class="filter-bar"><button class="filter-chip active">All</button><button class="filter-chip">AI / ML</button><button class="filter-chip">FinTech</button><button class="filter-chip">HealthTech</button><button class="filter-chip">EdTech</button><button class="filter-chip">CleanTech</button><button class="filter-chip">SaaS</button></div>
+  <div class="ideas-grid" id="investor-browse-grid"></div>
+</div>
+<script>
+const STARTUPS = [{ name:'GreenChain Logistics', icon:'fas fa-leaf', pitch:'AI-powered eco-friendly delivery routing, cutting carbon footprint by 40% using real-time algorithms and EV integration.', tags:['CleanTech','AI','Logistics'], score:8.2, founder:'AJ', founderName:'Alex J.', scoreClass:'score-high' },{ name:'EduFlow AI', icon:'fas fa-graduation-cap', pitch:'Personalized AI tutoring that adapts to each student\'s learning style, improving outcomes by 60%.', tags:['EdTech','AI','SaaS'], score:7.6, founder:'SR', founderName:'Sarah R.', scoreClass:'score-high' },{ name:'HealthBridge', icon:'fas fa-heartbeat', pitch:'Connecting rural patients with urban specialists via telemedicine, reducing diagnostic wait times by 80%.', tags:['HealthTech','Telemedicine'], score:8.8, founder:'MK', founderName:'Mike K.', scoreClass:'score-high' },{ name:'FinSpark', icon:'fas fa-coins', pitch:'Automated micro-investing for Gen Z — round up purchases and invest the spare change into diversified ETFs.', tags:['FinTech','Investing'], score:6.9, founder:'PL', founderName:'Priya L.', scoreClass:'score-medium' },{ name:'BuildFast SaaS', icon:'fas fa-code', pitch:'No-code platform for SMBs to launch custom web apps in hours, not months. 300+ templates included.', tags:['SaaS','No-Code','B2B'], score:7.4, founder:'TD', founderName:'Tom D.', scoreClass:'score-medium' },{ name:'AquaSense', icon:'fas fa-tint', pitch:'IoT sensors that monitor water quality in real-time for municipalities, preventing contamination events before they happen.', tags:['CleanTech','IoT'], score:5.8, founder:'NK', founderName:'Nina K.', scoreClass:'score-low' }];
+function ideaCard(s){ return `<div class="idea-card"><div class="idea-card-top"><div class="idea-startup-icon"><i class="${s.icon}"></i></div><div class="idea-score"><span class="score-badge ${s.scoreClass}">${s.score}/10</span></div></div><h3>${s.name}</h3><p>${s.pitch}</p><div class="idea-tags">${s.tags.map(t=>`<span class="idea-tag">${t}</span>`).join('')}</div><div class="idea-card-footer"><div class="founder-meta"><div class="founder-avatar-sm">${s.founder}</div><span class="founder-name-sm">${s.founderName}</span></div><div class="idea-card-actions"><button class="action-btn" onclick="likeCard(this)" title="Like"><i class="fas fa-heart"></i></button><button class="action-btn" title="Save"><i class="fas fa-bookmark"></i></button><button class="action-btn" title="Connect"><i class="fas fa-paper-plane"></i></button></div></div></div>`; }
+document.getElementById('investor-ideas-grid').innerHTML = STARTUPS.slice(0,3).map(ideaCard).join('');
+document.getElementById('investor-browse-grid').innerHTML = STARTUPS.map(ideaCard).join('');
+function likeCard(btn){ btn.classList.toggle('liked'); btn.style.background='rgba(79,70,229,0.1)'; }
+function toast(msg){ let t=document.createElement('div'); t.className='toast'; t.innerHTML=`<i class="fas fa-check-circle"></i> ${msg}`; document.body.appendChild(t); setTimeout(()=>t.remove(),3000); }
+function logout(){ localStorage.removeItem('nexusLaunchAuth'); window.location.href='landing_v2.html'; }
+document.querySelectorAll('.filter-chip').forEach(c=>c.addEventListener('click',function(){ document.querySelectorAll('.filter-chip').forEach(f=>f.classList.remove('active')); this.classList.add('active'); toast('Filter applied'); }));
+</script>
+</body>
+</html>
