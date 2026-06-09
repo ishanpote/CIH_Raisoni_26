@@ -317,7 +317,7 @@ This project is part of the CIH (Caring in Hardware) Raisoni hackathon initiativ
 
 For issues, feature requests, or questions:
 - **GitHub Issues:** https://github.com/ishanpote/CIH_Raisoni_26/issues
-- **Email:** contact@nexuslaunch.com (demo)
+- **Email:** contact@nexuslaunch.com
 
 ---
 
