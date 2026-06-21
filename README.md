@@ -309,7 +309,7 @@ vercel --prod --yes
 
 ## License
 
-This project is part of the CIH (Caring in Hardware) Raisoni hackathon initiative. All rights reserved.
+This project is part of the CIH Raisoni hackathon initiative. All rights reserved.
 
 ---
 
