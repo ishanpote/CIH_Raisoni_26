@@ -317,7 +317,7 @@ This project is part of the CIH Raisoni hackathon initiative. All rights reserve
 
 For issues, feature requests, or questions:
 - **GitHub Issues:** https://github.com/ishanpote/CIH_Raisoni_26/issues
-- **Email:** contact@nexuslaunch.com
+- **Email:** ishanvp2005@gmail.com
 
 ---
 
